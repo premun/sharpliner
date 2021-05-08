@@ -6,8 +6,12 @@
 
   <ItemGroup>
     <!-- These will appear in artifacts/packages after you call `dotnet pack` -->
-    <PackageReference Include="Sharpliner" Version="1.0.0" />
+    <!-- <PackageReference Include="Sharpliner" Version="1.0.0" /> -->
     <PackageReference Include="Sharpliner.Tools" Version="1.0.0" />
+    <Reference Include="C:\Users\prvysoky\.nuget\packages\sharpliner.tools\1.0.0\tasks\net5.0\Sharpliner.dll">
+      <HintPath>C:\Users\prvysoky\.nuget\packages\sharpliner.tools\1.0.0\tasks\net5.0\Sharpliner.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>

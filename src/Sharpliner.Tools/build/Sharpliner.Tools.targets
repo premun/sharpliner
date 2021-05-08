@@ -4,6 +4,6 @@
       <_AssemblyToSearch>$(OutputPath)$(AssemblyName).dll</_AssemblyToSearch>
     </PropertyGroup>
     <Message Importance="high" Text="Publishing all pipeline definitions inside $(_AssemblyToSearch)" />
-    <PublishPipelines Assembly="$(_AssemblyToSearch)" />
+    <!-- <PublishPipelines Assembly="$(_AssemblyToSearch)" /> -->
   </Target>
 </Project>

@@ -1,5 +1,15 @@
 <Project TreatAsLocalProperty="TaskFolder;TaskAssembly">
 
+  <ItemGroup>
+    <!-- <None Include="$(MSBuildThisFileDirectory)\..\tasks\net5.0\Sharpliner.dll">
+      <Link>Sharpliner.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None> -->
+    <!-- <Reference Include="Sharpliner">
+      <HintPath>$(MSBuildThisFileDirectory)..\tasks\net5.0\Sharpliner.dll</HintPath>
+    </Reference> -->
+  </ItemGroup>
+
   <PropertyGroup>
     <TaskAssembly>$(MSBuildThisFileDirectory)..\tasks\net5.0\Sharpliner.Tools.dll</TaskAssembly>
   </PropertyGroup>
