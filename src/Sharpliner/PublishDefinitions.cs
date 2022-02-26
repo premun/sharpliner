@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,18 +30,37 @@ public class PublishDefinitions : Microsoft.Build.Utilities.Task
     /// </summary>
     public override bool Execute()
     {
+        if (string.IsNullOrEmpty(Assembly))
+        {
+            throw new ArgumentNullException(nameof(Assembly), "Assembly parameter not set");
+        }
+
+        if (!File.Exists(Assembly))
+        {
+            throw new FileNotFoundException(Assembly);
+        }
+
+        // We need to copy the DLL into our application's path so that Assembly.Load can resolve it properly and add to the main binding context
+        var dest = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)!, Path.GetFileName(Assembly)!)
+            .Replace("file:\\", "");
+
+        Log.LogWarning($"Copying {Assembly} to {dest}");
+        File.Copy(Assembly!, dest, true);
+
+        Assembly assembly = System.Reflection.Assembly.Load(AssemblyName.GetAssemblyName(Assembly));
+
         var definitionFound = false;
 
-        foreach (var definition in FindAllImplementations<ISharplinerDefinition>(isInterface: true))
+        foreach (ISharplinerDefinition definition in FindAllImplementations<ISharplinerDefinition>(assembly))
         {
             definitionFound = true;
             PublishDefinition(definition);
         }
 
-        foreach (var d in FindDefinitionsInCollections())
+        foreach ((ISharplinerDefinition definition, Type collection) in FindDefinitionsInCollections(assembly))
         {
             definitionFound = true;
-            PublishDefinition(d.Definition, d.Collection);
+            PublishDefinition(definition, collection);
         }
 
         if (!definitionFound)
@@ -58,35 +76,18 @@ public class PublishDefinitions : Microsoft.Build.Utilities.Task
     /// </summary>
     /// <param name="definition">ISharplinerDefinition object</param>
     /// <param name="collection">Type of the collection the definition is coming from (if it is)</param>
-    private void PublishDefinition(object definition, Type? collection = null)
+    private void PublishDefinition(ISharplinerDefinition definition, Type? collection = null)
     {
-        // I am unable to just cat to IDefinition for some reason (they come from the same code, but maybe different .dll files or something)
-        Type type = definition.GetType();
-        Type iface = type.GetInterfaces().First(i => i.GUID == typeof(ISharplinerDefinition).GUID);
-        var getPath = iface.GetMethod(nameof(ISharplinerDefinition.GetTargetPath));
-        var validate = iface.GetMethod(nameof(ISharplinerDefinition.Validate));
-        var publish = iface.GetMethod(nameof(ISharplinerDefinition.Publish));
+        var path = definition.GetTargetPath();
 
-        if (publish is null || validate is null || getPath is null)
-        {
-            Log.LogError($"Failed to get definition metadata for {collection?.FullName ?? type.FullName}");
-            return;
-        }
-
-        if (getPath.Invoke(definition, null) is not string path)
-        {
-            Log.LogError($"Failed to get target path for {collection?.Name ?? type.Name} ");
-            return;
-        }
-
-        var typeName = collection == null ? type.Name : collection.Name + " / " + Path.GetFileName(path);
+        var typeName = collection == null ? definition.GetType().Name : collection.Name + " / " + Path.GetFileName(path);
 
         Log.LogMessage(MessageImportance.High, $"{typeName}:");
         Log.LogMessage(MessageImportance.High, $"  Validating definition..");
 
         try
         {
-            validate.Invoke(definition, null);
+            definition.Validate();
         }
         catch (TargetInvocationException e)
         {
@@ -103,7 +104,7 @@ public class PublishDefinitions : Microsoft.Build.Utilities.Task
         string? hash = GetFileHash(path);
 
         // Publish pipeline
-        publish.Invoke(definition, null);
+        definition.Publish();
 
         if (hash == null)
         {
@@ -137,77 +138,24 @@ public class PublishDefinitions : Microsoft.Build.Utilities.Task
         }
     }
 
-    private IEnumerable<(object Definition, Type Collection, int Number)> FindDefinitionsInCollections()
+    private IEnumerable<(ISharplinerDefinition Definition, Type Collection)> FindDefinitionsInCollections(Assembly assembly) =>
+        FindAllImplementations<ISharplinerDefinitionCollection>(assembly)
+            .SelectMany(collection => collection.Definitions.Select(definition => (definition, collection.GetType())));
+
+    private List<T> FindAllImplementations<T>(Assembly assembly)
     {
-        var collections = FindAllImplementations<ISharplinerDefinitionCollection>(isInterface: true);
+        var pipelines = new List<T>();
+        var typeToFind = typeof(T);
 
-        foreach (var collection in collections)
+        foreach (Type type in assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract && t.IsAssignableTo(typeToFind)))
         {
-            var type = collection.GetType();
-            Type iface = type.GetInterfaces().First(i => i.GUID == typeof(ISharplinerDefinitionCollection).GUID);
-
-            var definitionsProperty = iface.GetProperty(nameof(ISharplinerDefinitionCollection.Definitions))?.GetValue(collection, null);
-            if (definitionsProperty is not IEnumerable definitions)
-            {
-                Log.LogError($"Failed to get definitions from collection {type.FullName}");
-                continue;
-            }
-
-            int i = 1;
-            foreach (var definition in definitions)
-            {
-                yield return (definition, type, i++);
-            }
-        }
-    }
-
-    private List<object> FindAllImplementations<T>(bool isInterface)
-    {
-        var assembly = System.Reflection.Assembly.LoadFrom(Assembly ?? throw new ArgumentNullException(nameof(Assembly), "Assembly parameter not set"));
-
-        var pipelines = new List<object>();
-        var pipelineBaseType = typeof(T);
-
-        foreach (Type type in assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract))
-        {
-            if (isInterface)
-            {
-                // I am unable to just do "is T" because the types from the assembly cannot be cast for some reasone
-                // (they come from the same code, but maybe different .dll files or something)..
-                // I tried to make sure there is only one Sharpliner.dll but still couldn't get it to work so we have to treat them as anonymous
-                var interfaces = type.GetInterfaces();
-                if (!interfaces.Any(iface => iface.FullName == typeof(T).FullName && iface.GUID == typeof(T).GUID))
-                {
-                    continue;
-                }
-            }
-            else
-            {
-                bool isChild = false;
-                var baseType = type.BaseType;
-
-                // I am unable to cast this to PipelineDefinitionBase and just do t.IsSubClass or t.IsAssignableTo because the types don't seem
-                // to be the same even when they are (they come from the same code, but maybe different .dll files)..
-                // I tried to make sure there is only one Sharpliner.dll but still couldn't get it to work so we have to parse invoke Publish via reflection
-                while (!isChild && baseType is not null)
-                {
-                    isChild |= baseType.FullName == typeof(T).FullName && baseType.GUID == typeof(T).GUID;
-                    baseType = baseType.BaseType;
-                }
-
-                if (!isChild)
-                {
-                    continue;
-                }
-            }
-
             object? pipelineDefinition = Activator.CreateInstance(type);
             if (pipelineDefinition is null)
             {
                 throw new Exception($"Failed to instantiate {type.GetType().FullName}");
             }
 
-            pipelines.Add(pipelineDefinition);
+            pipelines.Add((T)pipelineDefinition);
         }
 
         return pipelines;
