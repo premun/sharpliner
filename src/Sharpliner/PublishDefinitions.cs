@@ -41,11 +41,27 @@ public class PublishDefinitions : Microsoft.Build.Utilities.Task
         }
 
         // We need to copy the DLL into our application's path so that Assembly.Load can resolve it properly and add to the main binding context
-        var dest = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)!, Path.GetFileName(Assembly)!)
-            .Replace("file:\\", "");
+        //var dest = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)!, Path.GetFileName(Assembly)!)
+        //    .Replace("file:\\", "");
 
-        Log.LogWarning($"Copying {Assembly} to {dest}");
-        File.Copy(Assembly!, dest, true);
+        //Log.LogWarning($"Copying {Assembly} to {dest}");
+        //File.Copy(Assembly!, dest, true);
+
+        var projectAssemblies = new DirectoryInfo(Path.GetDirectoryName(Assembly)!).GetFiles("*.dll");
+        Log.LogWarning(string.Join(", ", projectAssemblies.Select(a => a.Name)));
+
+        /*AssemblyLoadContext.Default.Resolving += (sender, assemblyName) =>
+        {
+            var fileName = assemblyName.Name + ".dll";
+            Log.LogWarning($"Resolving {fileName}");
+            var dll = projectAssemblies.FirstOrDefault(a => a.Name == fileName);
+            if (dll == null)
+            {
+                return null;
+            }
+
+            return System.Reflection.Assembly.LoadFrom(dll.FullName);
+        };*/
 
         Assembly assembly = System.Reflection.Assembly.Load(AssemblyName.GetAssemblyName(Assembly));
 
