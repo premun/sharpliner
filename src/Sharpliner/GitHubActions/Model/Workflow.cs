@@ -7,6 +7,8 @@ namespace Sharpliner.GitHubActions;
 /// </summary>
 public record Workflow
 {
+    public string? Name { get; set; }
+
     /// <summary>
     /// Contains all the different triggers that have been configured to launch a workflow when a GitHub event
     /// occurs.
@@ -31,19 +33,19 @@ public record Workflow
     /// </list>
     ///
     /// </summary>
-    public Trigger On { get; } = new();
+    public Trigger On { get; set; } = new();
 
     /// <summary>
     /// Allows to set the permissions granted to the Github token that will be used with the workflow. This
     /// setting will apply to all the jobs in a workflow. You can override this setting per job.
     /// </summary>
-    public Permissions Permissions { get; init; } = new();
+    public Permissions Permissions { get; set; } = new();
 
     /// <summary>
     /// A map of environment variables that are available to the steps of all jobs. When more than one variable
     /// with the same name is used, the latter one will be used.
     /// </summary>
-    public Dictionary<string, string> Env { get; } = new();
+    public Dictionary<string, string> Env { get; set; } = new();
 
     /// <summary>
     /// Provide a concurrency context to ensure that just one workflow is executed at a given time.
@@ -53,10 +55,10 @@ public record Workflow
     /// <summary>
     /// Provide the default settings to be used by all jobs in the workflow.
     /// </summary>
-    public Defaults Defaults { get; } = new();
+    public Defaults Defaults { get; set; } = new();
 
     /// <summary>
     /// List of jobs to be executed by the workflow.
     /// </summary>
-    public List<Job> Jobs { get; } = new();
+    public List<Job> Jobs { get; set; } = new();
 }

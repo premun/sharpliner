@@ -76,4 +76,6 @@ public record Container
     /// Get/Set additional create options for the docker image.
     /// </summary>
     public List<DockerOptions> DockerOptions { get; set; } = new();
+
+    public static implicit operator Container(string image) => new(image);
 }
