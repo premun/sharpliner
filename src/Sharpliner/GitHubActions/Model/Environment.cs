@@ -2,8 +2,7 @@ using System;
 
 namespace Sharpliner.GitHubActions;
 
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Environment
+public record Environment
 {
     public Environment(string name, string? url = null)
     {
@@ -15,7 +14,7 @@ internal record Environment
         Name = name;
         Url = url;
     }
-    
+
     public string Name { get; init; }
     public string? Url { get; init; }
 }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace Sharpliner.GitHubActions;
 
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal enum GitHubPermissionScope
+public enum GitHubPermissionScope
 {
     Actions,
     Checks,
@@ -18,16 +17,14 @@ internal enum GitHubPermissionScope
     Statuses,
 }
 
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal enum GitHubPermission
+public enum GitHubPermission
 {
     None,
     Read,
     Write
 }
 
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Permissions
+public record Permissions
 {
     public HashSet<GitHubPermissionScope> Read { get; } = new();
     public HashSet<GitHubPermissionScope> Write { get; } = new();

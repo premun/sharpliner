@@ -5,8 +5,7 @@ namespace Sharpliner.GitHubActions;
 /// <summary>
 /// Represents the service container that will be used for the job
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Service
+public record Service
 {
     /// <summary>
     /// Get the Id of the service.

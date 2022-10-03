@@ -6,8 +6,7 @@ namespace Sharpliner.GitHubActions;
 /// <summary>
 /// Abstract class that represents all the triggers that are initiated manually by a user.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Manual : Event
+public record Manual : Event
 {
     /// <summary>
     /// Trigger that will execute the workflow via the GitHub web manually.
@@ -24,8 +23,7 @@ internal record Manual : Event
 /// Trigger that allows to execute a workflow manually using custom inputs. These inputs can be optional or required
 /// and can later be accessed within the workflow.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record WorkflowDispatch
+public record WorkflowDispatch
 {
     /// <summary>
     /// Represents a workflow input when it is manually triggered. It must have a nam
@@ -72,8 +70,7 @@ internal record WorkflowDispatch
 /// <summary>
 /// Triggers a workflow when the repository_dispatch has been triggered by an external service.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record RepositoryDispatch
+public record RepositoryDispatch
 {
     /// <summary>
     /// List of activities that will be considered when the event is triggered. This are provided by the

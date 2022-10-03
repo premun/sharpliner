@@ -6,8 +6,7 @@ namespace Sharpliner.GitHubActions;
 /// <summary>
 /// Base abstract class for all webhook related triggers.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal abstract record Webhook : Event;
+public abstract record Webhook : Event;
 
 // All the following enum types look verbose.. but we are
 // looking into the future with https://github.com/dotnet/csharplang/issues/2926
@@ -30,8 +29,7 @@ internal abstract record Webhook : Event;
 /// Triggers the workflow for the 'check_run' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record CheckRun : Webhook
+public record CheckRun : Webhook
 {
     public enum Activity
     {
@@ -51,8 +49,7 @@ internal record CheckRun : Webhook
 /// Triggers the workflow for the 'check_suite' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record CheckSuite : Webhook
+public record CheckSuite : Webhook
 {
     public enum Activity
     {
@@ -70,45 +67,38 @@ internal record CheckSuite : Webhook
 /// <summary>
 /// Triggers the workflow for the 'create' event.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Create : Webhook;
+public record Create : Webhook;
 
 /// <summary>
 /// Triggers the workflow for the 'delete' event.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Delete : Webhook;
+public record Delete : Webhook;
 
 /// <summary>
 /// Triggers the workflow for the 'deployment' event.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Deployment : Webhook;
+public record Deployment : Webhook;
 
 /// <summary>
 /// Triggers the workflow for the 'deployment_status' event.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record DeploymentStatus : Webhook;
+public record DeploymentStatus : Webhook;
 
 /// <summary>
 /// Triggers the workflow for the 'fork' event.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Fork : Webhook;
+public record Fork : Webhook;
 
 /// <summary>
 /// Triggers the workflow for the 'gollum' event.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Gollum : Webhook;
+public record Gollum : Webhook;
 
 /// <summary>
 /// Triggers the workflow for the 'issue_comment' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record IssueComment : Webhook
+public record IssueComment : Webhook
 {
     public enum Activity
     {
@@ -127,8 +117,7 @@ internal record IssueComment : Webhook
 /// Triggers the workflow for the 'issues' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Issues : Webhook
+public record Issues : Webhook
 {
     public enum Activity
     {
@@ -160,8 +149,7 @@ internal record Issues : Webhook
 /// Triggers the workflow for the 'label' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Label : Webhook
+public record Label : Webhook
 {
     public enum Activity
     {
@@ -180,8 +168,7 @@ internal record Label : Webhook
 /// Triggers the workflow for the 'milestone' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Milestone : Webhook
+public record Milestone : Webhook
 {
     public enum Activity
     {
@@ -201,15 +188,13 @@ internal record Milestone : Webhook
 /// <summary>
 /// Triggers the workflow for the 'page_build' event.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record PageBuild : Webhook { }
+public record PageBuild : Webhook { }
 
 /// <summary>
 /// Triggers the workflow for the 'project' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Project : Webhook
+public record Project : Webhook
 {
     public enum Activity
     {
@@ -231,8 +216,7 @@ internal record Project : Webhook
 /// Triggers the workflow for the 'project_card' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record ProjectCard : Webhook
+public record ProjectCard : Webhook
 {
     public enum Activity
     {
@@ -253,8 +237,7 @@ internal record ProjectCard : Webhook
 /// Triggers the workflow for the 'project_column' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record ProjectColumn : Webhook
+public record ProjectColumn : Webhook
 {
     public enum Activity
     {
@@ -269,15 +252,13 @@ internal record ProjectColumn : Webhook
     /// </summary>
     public List<Activity> Activities { get; } = new();
 }
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Public : Webhook { }
+public record Public : Webhook { }
 
 /// <summary>
 /// Triggers the workflow for the 'pull_request' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record PullRequest : Webhook
+public record PullRequest : Webhook
 {
     public enum Activity
     {
@@ -307,8 +288,7 @@ internal record PullRequest : Webhook
 /// Triggers the workflow for the 'pull_request_review' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record PullRequestReview : Webhook
+public record PullRequestReview : Webhook
 {
     public enum Activity
     {
@@ -327,8 +307,7 @@ internal record PullRequestReview : Webhook
 /// Triggers the workflow for the 'pull_request_review_comment' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record PullRequestReviewComment : Webhook
+public record PullRequestReviewComment : Webhook
 {
     public enum Activity
     {
@@ -347,8 +326,7 @@ internal record PullRequestReviewComment : Webhook
 /// Triggers the workflow for the 'pull_request_target' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record PullRequestTarget : Webhook
+public record PullRequestTarget : Webhook
 {
 
     public enum Activity
@@ -378,15 +356,13 @@ internal record PullRequestTarget : Webhook
 /// <summary>
 /// Triggers the workflow for the 'push' event.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Push : Webhook;
+public record Push : Webhook;
 
 /// <summary>
 /// Triggers the workflow for the 'registry_package' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record RegistryPackage : Webhook
+public record RegistryPackage : Webhook
 {
 
     public enum Activity
@@ -405,8 +381,7 @@ internal record RegistryPackage : Webhook
 /// Triggers the workflow for the 'release' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Release : Webhook
+public record Release : Webhook
 {
     public enum Activity
     {
@@ -424,15 +399,13 @@ internal record Release : Webhook
     /// </summary>
     public List<Activity> Activities { get; } = new();
 }
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Status : Webhook { }
+public record Status : Webhook { }
 
 /// <summary>
 /// Triggers the workflow for the 'watch' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Watch : Webhook
+public record Watch : Webhook
 {
     public enum Activity
     {
@@ -449,8 +422,7 @@ internal record Watch : Webhook
 /// Triggers the workflow for the 'workflow_run' event. For than one activity can trigger the
 /// event. By default all activities trigger the workflow. Use the Activities property to filter them.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record WorkflowRun : Webhook
+public record WorkflowRun : Webhook
 {
     public enum Activity
     {

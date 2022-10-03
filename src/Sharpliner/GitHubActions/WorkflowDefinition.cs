@@ -4,11 +4,10 @@ using Sharpliner.Common;
 
 namespace Sharpliner.GitHubActions;
 
-// TODO (GitHub Actions): Made internal until we get to a more complete API
 /// <summary>
 /// Inherit from this class to define a GitHub workflow.
 /// </summary>
-internal abstract class WorkflowDefinition : ISharplinerDefinition
+public abstract class WorkflowDefinition : ISharplinerDefinition
 {
     /// <summary>
     /// Path to the YAML file where this pipeline will be exported to.
@@ -21,7 +20,7 @@ internal abstract class WorkflowDefinition : ISharplinerDefinition
 
     /// <summary>
     /// Header that will be shown at the top of the generated YAML file
-    /// 
+    ///
     /// Leave empty array to omit file header.
     /// </summary>
     public virtual string[]? Header => SharplinerPublisher.GetDefaultHeader(GetType());

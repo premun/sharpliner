@@ -4,8 +4,7 @@ using Sharpliner.AzureDevOps.ConditionedExpressions;
 
 namespace Sharpliner.GitHubActions;
 
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Job
+public record Job
 {
     public Job(string id)
     {

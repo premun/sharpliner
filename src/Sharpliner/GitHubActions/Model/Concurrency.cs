@@ -2,8 +2,7 @@ using System;
 
 namespace Sharpliner.GitHubActions;
 
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Concurrency
+public record Concurrency
 {
     /// <summary>
     /// Represents a concurrency group that will be used to coordinate the execution of the workflow. This will

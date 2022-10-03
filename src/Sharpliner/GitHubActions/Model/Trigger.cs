@@ -5,8 +5,7 @@ namespace Sharpliner.GitHubActions;
 /// <summary>
 /// Representation of all the possible triggers that a GitHub workflow can react too.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal class Trigger
+public class Trigger
 {
     /// <summary>
     /// Collection of triggers that execute the workflow based on a schedule.

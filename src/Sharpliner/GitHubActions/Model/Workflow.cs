@@ -5,8 +5,7 @@ namespace Sharpliner.GitHubActions;
 /// <summary>
 /// A workflow represents and automatic process in GitHub that have one more more steps.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Workflow
+public record Workflow
 {
     /// <summary>
     /// Contains all the different triggers that have been configured to launch a workflow when a GitHub event

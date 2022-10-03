@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 namespace Sharpliner.GitHubActions;
 
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record DockerOptions { }
+public record DockerOptions { }
 
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record ContainerCredentials
+public record ContainerCredentials
 {
     public string? Username { get; set; }
 
@@ -17,8 +15,7 @@ internal record ContainerCredentials
 /// <summary>
 /// Represents the docker container that will be used to run the job.
 /// </summary>
-// TODO (GitHub Actions): Made internal until we get to a more complete API
-internal record Container
+public record Container
 {
     /// <summary>
     /// Use the container with the given ID will be used to run the job.
