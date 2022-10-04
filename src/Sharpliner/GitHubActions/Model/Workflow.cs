@@ -7,31 +7,31 @@ namespace Sharpliner.GitHubActions;
 /// </summary>
 public record Workflow
 {
+    /// <summary>
+    /// The name of your workflow. GitHub displays the names of your workflows on your repository's "Actions" tab.
+    /// If you omit name, GitHub sets it to the workflow file path relative to the root of the repository.
+    /// </summary>
     public string? Name { get; set; }
 
     /// <summary>
-    /// Contains all the different triggers that have been configured to launch a workflow when a GitHub event
-    /// occurs.
+    /// The name for workflow runs generated from the workflow.
+    /// GitHub displays the workflow run name in the list of workflow runs on your repository's "Actions" tab.
+    /// If you omit run-name, the run name is set to event-specific information for the workflow run.
     ///
-    /// There are three main different types of triggers:
+    /// For example, for a workflow triggered by a push or pull_request event, it is set as the commit message.
     ///
-    /// <list type="bullet">
-    ///     <item>
-    ///         <term>Manuals</term>
-    ///         <description>All those triggers that required manual intervention.</description>
-    ///     </item>
-    ///     <item>
-    ///         <term>Schedules</term>
-    ///         <description>All those triggers that will launch a workflow based on a schedule.</description>
-    ///     </item>
-    ///     <item>
-    ///         <term>Webhooks</term>
-    ///         <description>All those triggers that will launch a workflow when a webhook event is generated
-    ///             from GitHub
-    ///         </description>
-    ///     </item>
-    /// </list>
+    /// This value can include expressions and can reference the github and inputs contexts.
     ///
+    /// Example:
+    /// run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+    /// </summary>
+    public string? RunName { get; set; }
+
+    /// <summary>
+    /// To automatically trigger a workflow, use on to define which events can cause the workflow to run. 
+    ///
+    /// You can define single or multiple events that can a trigger workflow, or set a time schedule.
+    /// You can also restrict the execution of a workflow to only occur for specific files, tags, or branch changes.
     /// </summary>
     public Trigger On { get; set; } = new();
 
