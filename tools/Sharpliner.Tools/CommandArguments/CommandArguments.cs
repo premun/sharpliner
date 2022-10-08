@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using Sharpliner.Tools.Arguments;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
+using Sharpliner.Tools.Arguments;
 
 namespace Sharpliner.Tools.CommandArguments;
 

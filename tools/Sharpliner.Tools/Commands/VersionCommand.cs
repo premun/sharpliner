@@ -1,8 +1,8 @@
 ﻿using System;
-using Mono.Options;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using Mono.Options;
 
 namespace Sharpliner.Tools.Commands;
 

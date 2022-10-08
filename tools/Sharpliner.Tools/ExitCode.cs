@@ -18,6 +18,11 @@ public enum ExitCode
     HELP_SHOWN = 2,
 
     /// <summary>
+    /// There was a problem with one of the command line options
+    /// </summary>
+    INVALID_ARGUMENTS = 3,
+
+    /// <summary>
     /// Generic code for cases where we couldn't determine the exact cause
     /// </summary>
     GENERAL_FAILURE = 71,

@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using System;
+﻿using System;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using Mono.Options;
 using Sharpliner.Tools.Commands;
 
@@ -51,6 +52,7 @@ public static class Program
     {
         var commandSet = new CommandSet("sharpliner.tools")
         {
+            new TemplateApiCommand(new ServiceCollection()),
             new Commands.HelpCommand(),
             new VersionCommand()
         };
