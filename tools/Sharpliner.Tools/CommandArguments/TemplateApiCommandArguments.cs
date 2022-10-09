@@ -5,8 +5,12 @@ namespace Sharpliner.Tools.CommandArguments;
 
 internal class TemplateApiCommandArguments : CommandArguments
 {
+    public OutputPathArgument OutputPath { get; } = new();
+    public NamespaceArgument Namespace { get; } = new();
+
     protected override IEnumerable<Argument> GetArguments() => new Argument[]
     {
-        // TODO
+        OutputPath,
+        Namespace,
     };
 }
