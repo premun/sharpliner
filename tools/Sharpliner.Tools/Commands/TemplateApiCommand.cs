@@ -38,17 +38,17 @@ internal class TemplateApiCommand : BaseCommand<TemplateApiCommandArguments>
             }
 
             logger.LogInformation("Processing {path}..", path);
-            ProcessTemplate(logger, path);
-            logger.LogInformation("API for template {path} created", path);
+            ProcessTemplate(path);
+            logger.LogInformation("API for template {path} created in {destination}", path, Arguments.OutputPath);
         }
 
         return Task.FromResult(ExitCode.SUCCESS);
     }
 
-    private void ProcessTemplate(ILogger logger, string path)
+    private void ProcessTemplate(string path)
     {
         string? content = File.Exists(Arguments.OutputPath) ? File.ReadAllText(Arguments.OutputPath) : null;
-        string className = Path.GetFileNameWithoutExtension(path);
+        string className = Path.GetFileNameWithoutExtension(Arguments.OutputPath);
 
         var lines = _templateGenerator.AddOrUpdateApi(Arguments.Namespace, className, content, path);
 
