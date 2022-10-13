@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -9,11 +10,13 @@ namespace Sharpliner.Tools.TemplateApi;
 
 public class TemplateApiGenerator
 {
+    private string _newLine = Environment.NewLine;
+
     private static readonly IDeserializer s_deserializer = new DeserializerBuilder()
         .WithNamingConvention(CamelCaseNamingConvention.Instance)
         .Build();
 
-    public string[] AddOrUpdateApi(string namespaceName, string className, string? content, string templatePath)
+    public List<string> AddOrUpdateApi(string namespaceName, string className, string? content, string templatePath)
     {
         ParsedTemplate template;
         using (var reader = File.OpenText(templatePath))
@@ -23,10 +26,148 @@ public class TemplateApiGenerator
 
         content ??= GetNewContent(namespaceName, className);
 
-        var newLine = content.Contains("\r\n") ? "\r\n" : Environment.NewLine;
-        var lines = content.Split(newLine).ToList();
+        _newLine = content.Contains("\r\n") ? "\r\n" : Environment.NewLine;
+        var lines = content.Split(_newLine).ToList();
 
-        return lines.ToArray();
+        int start = lines.FindIndex(l => l.Contains("public static class " + className)) + 2;
+        int bodyLength = lines.Count - start - 1;
+
+        var body = lines.Skip(start).Take(bodyLength).ToList();
+        var newBody = AddOrUpdateMethod(templatePath, template, body);
+
+        var newContent = lines
+            .Take(start)
+            .Concat(newBody)
+            .Concat(lines.Skip(start + bodyLength))
+            .ToArray();
+
+        var result = new List<string>();
+        string? previous = "_";
+        foreach (var line in newContent)
+        {
+            if (string.IsNullOrEmpty(previous) && string.IsNullOrEmpty(line))
+            {
+                continue;
+            }
+
+            if (string.IsNullOrEmpty(previous) && line == "}")
+            {
+                result.RemoveAt(result.Count - 1);
+            }
+
+            previous = line;
+            result.Add(line);
+        }
+
+        return result;
+    }
+
+    private List<string> AddOrUpdateMethod(string templatePath, ParsedTemplate template, List<string> body)
+    {
+        var methodName = CreateMethodName(Path.GetFileNameWithoutExtension(templatePath));
+        var arguments = GetArguments(template);
+        var relativePath = GetRelativePath(templatePath);
+        var methodBody = GetMethodBody(relativePath, methodName, InferType(template), arguments);
+
+        var methodTag = $"// {relativePath}";
+        var startIndex = body.FindIndex(s => s.Contains(methodTag));
+        var endIndex = body.FindIndex(startIndex + 1, s => s.Length == 0 || s.Contains(");") || s == "}");
+
+        if (startIndex != -1)
+        {
+            body.RemoveRange(startIndex, endIndex - startIndex + 1);
+        }
+
+        return body
+            .Take(startIndex)
+            .Append($"    {methodTag}")
+            .Concat(methodBody)
+            .Concat(body.Skip(startIndex))
+            .ToList();
+    }
+
+    private List<string> GetMethodBody(string relativePath, string methodName, string type, TemplateReferenceArgument[] arguments)
+    {
+        var args = arguments.Select(arg => $"{arg.Type} {arg.Name}{(arg.Default is not null ? $" = {arg.Default}" : string.Empty)}").ToList();
+
+        // Break and indent args?
+        var methodArgs = args.Count > 3
+            ? $"{_newLine}        " + string.Join($",{_newLine}        ", args)
+            : string.Join(", ", args);
+
+        var signature = $"    public static Template<{type}> {methodName}({methodArgs}) => new(\"{relativePath}\"";
+        
+        if (!arguments.Any())
+        {
+            signature += ");";
+        }
+        else
+        {
+            signature += ", new()";
+        }
+
+        var body = new List<string>
+        {
+            signature,
+        };
+
+        if (arguments.Any())
+        {
+            body.Add("    {");
+            body.AddRange(arguments.Select(a => $"        {{ \"{ a.Name }\", {a.Name} }},"));
+            body.Add("    });");
+        }
+
+        body.Add(string.Empty);
+
+        return body;
+    }
+
+    private static TemplateReferenceArgument[] GetArguments(ParsedTemplate parsedTemplate)
+    {
+        if (parsedTemplate.Parameters == null)
+        {
+            return Array.Empty<TemplateReferenceArgument>();
+        }
+
+        // TODO
+        return parsedTemplate.Parameters.Select(pair =>
+        {
+            return new TemplateReferenceArgument()
+            {
+                Name = pair.Key,
+                Type = "string",
+                Default = "\"foo\"",
+            };
+            //if (arg.TryGetValue("name", out var name) && name is string nameString)
+            //{
+            //    if (arg.TryGetValue("default", out var defaultValue))
+            //    {
+            //        return new TemplateReferenceArgument(nameString, defaultValue);
+            //    }
+
+            //    return new TemplateReferenceArgument(nameString);
+            //}
+        }).ToArray();
+    }
+
+    private static string GetRelativePath(string templatePath)
+    {
+        var gitRoot = new DirectoryInfo(Path.GetDirectoryName(templatePath)!);
+        while (!Directory.Exists(Path.Combine(gitRoot.FullName, ".git")))
+        {
+            gitRoot = gitRoot.Parent;
+
+            if (gitRoot == null)
+            {
+                throw new Exception($"Failed to find git repository in {Directory.GetParent(Assembly.GetExecutingAssembly().Location)?.FullName}");
+            }
+        }
+
+        return templatePath
+            .Substring(gitRoot.FullName.Length)
+            .TrimStart(Path.DirectorySeparatorChar)
+            .Replace('\\', '/');
     }
 
     private static string InferType(ParsedTemplate template)
@@ -55,14 +196,20 @@ public class TemplateApiGenerator
             "Unable to infer type of the template from its contents (stages, jobs, steps, variables). " +
             "Make sure the template contains at least one of these properties.");
     }
-    
+
+    private static string CreateMethodName(string templateName)
+    {
+        // TODO
+        return "Foo";
+    }
+
     private static string GetNewContent(string namespaceName, string className) =>
         $$"""
         using Sharpliner.AzureDevOps;
 
         namespace {{namespaceName}};
 
-        public static class {{className}} : TemplateRefenceGenerator
+        public static class {{className}}
         {
         }
         """;
@@ -76,7 +223,7 @@ public class TemplateApiGenerator
         public List<Dictionary<object, object>>? Variables { get; set; }
     }
 
-    private class TemplateParameter
+    private class TemplateReferenceArgument
     {
         public string? Name { get; set; }
         public string? Type { get; set; }
