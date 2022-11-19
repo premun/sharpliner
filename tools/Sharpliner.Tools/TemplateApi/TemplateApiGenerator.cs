@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Sharpliner.Tools.TemplateApi.Model;
+using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -19,10 +21,29 @@ public partial class TemplateApiGenerator
 
     public List<string> AddOrUpdateApi(string namespaceName, string className, string? content, string templatePath)
     {
+        // We try to parse the template file twice as there are two main ways to define parameters
+        // The first way is that parameters are fully specified
+        //   - name: myBoolean
+        //     type: boolean
+        //     default: true
+        //
+        // The second way is that parameters are key:value pairs of name:defaultValue
+        //   myBoolean: true
+        //
         ParsedTemplate template;
-        using (var reader = File.OpenText(templatePath))
+        try
         {
-            template = s_deserializer.Deserialize<ParsedTemplate>(reader);
+            using (var reader = File.OpenText(templatePath))
+            {
+                template = s_deserializer.Deserialize<OnlyDefaultValuesTemplate>(reader);
+            }
+        }
+        catch (YamlException e) when (e.Message.StartsWith("Expected 'MappingStart', got 'SequenceStart'"))
+        {
+            using (var reader = File.OpenText(templatePath))
+            {
+                template = s_deserializer.Deserialize<FullySpecifiedTemplate>(reader);
+            }
         }
 
         content ??= GetNewContent(namespaceName, className);
@@ -87,7 +108,7 @@ public partial class TemplateApiGenerator
             .ToList();
     }
 
-    private List<string> CreateMethod(string relativePath, string methodName, string type, TemplateReferenceArgument[] arguments)
+    private List<string> CreateMethod(string relativePath, string methodName, string type, TemplateParameterDefinition[] arguments)
     {
         var args = arguments.Select(arg => $"{arg.Type} {arg.Name}{(arg.Default is not null ? $" = {arg.Default}" : string.Empty)}").ToList();
 
@@ -124,38 +145,95 @@ public partial class TemplateApiGenerator
         return body;
     }
 
-    private static TemplateReferenceArgument[] GetArguments(ParsedTemplate parsedTemplate)
+    private static TemplateParameterDefinition[] GetArguments(ParsedTemplate parsedTemplate)
     {
-        if (parsedTemplate.Parameters == null)
+        IEnumerable<TemplateParameterDefinition>? parameters = parsedTemplate switch
         {
-            return Array.Empty<TemplateReferenceArgument>();
+            FullySpecifiedTemplate fullySpecifiedTemplate => fullySpecifiedTemplate.Parameters?.Select(ParseFullParameterDefinition),
+            OnlyDefaultValuesTemplate defaultValuesTemplate => defaultValuesTemplate.Parameters?.Select(pair =>
+            {
+                var parameter = new TemplateParameterDefinition
+                {
+                    Name = pair.Key,
+                };
+
+                (parameter.Type, parameter.Default) = ParseArgumentTypeAndDefault(pair.Value);
+                return parameter;
+            }),
+            _ => throw new NotImplementedException(),
+        };
+
+        if (parameters == null)
+        {
+            return Array.Empty<TemplateParameterDefinition>();
         }
 
-        return parsedTemplate.Parameters
-            .Select(pair => GetArgument(pair.Key, pair.Value))
-            .Order(TemplateReferenceArgumentComparer.Instance)
+        return parameters
+            .Order(TemplateParameterDefinitionComparer.Instance)
             .ToArray();
     }
 
-    private static TemplateReferenceArgument GetArgument(string name, object value)
+    private static (string, object?) ParseArgumentTypeAndDefault(object value) => value switch
     {
-        var argument = new TemplateReferenceArgument()
-        {
-            Name = name
-        };
+        Dictionary<object, object> => ("TaskInputs?", "null"),
+        int i => ("int", i),
+        double d => ("double", d),
+        float f => ("float", f),
+        "true" or "false" => ("bool", ((string)value).ToLowerInvariant()),
+        string s => ("string", s is not null ? $"\"{s}\"" : null),
+        bool b => ("bool", b),
+        _ => ("MISSING_TYPE", null),
+    };
 
-        (argument.Type, argument.Default) = value switch
-        {
-            int i => ("int", i),
-            double d => ("double", d),
-            float f => ("float", f),
-            "true" or "false" => ("bool", ((string)value).ToLowerInvariant()),
-            string s => ("string", s is not null ? $"\"{s}\"" : null),
-            bool b => ("bool", b),
-            _ => ("MISSING_TYPE", (object?)null)
-        };
+    private static TemplateParameterDefinition ParseFullParameterDefinition(Dictionary<object, object> argument)
+    {
+        var parameter = new TemplateParameterDefinition();
 
-        return argument;
+        if (argument.TryGetValue("name", out var nameDefinition))
+        {
+            parameter.Name = nameDefinition?.ToString();
+        }
+
+        if (string.IsNullOrEmpty(parameter.Name))
+        {
+            throw new Exception("Expected 'name' on parameter definition");
+        }
+
+        if (argument.TryGetValue("type", out var typeName))
+        {
+            if (argument.TryGetValue("default", out var definedDefault))
+            {
+                parameter.Default = ParseArgumentTypeAndDefault(definedDefault).Item2;
+            }
+
+            parameter.Type = typeName switch
+            {
+                "string" => "string",
+                "number" => "int",
+                "boolean" => "bool",
+                "object" => "TaskInputs?",
+                "step" => "Conditioned<Step>",
+                "stepList" => "ConditionedList<Step>",
+                "job" => "Conditioned<JobBase>",
+                "jobList" => "ConditionedList<JobBase>",
+                "deployment" => "Conditioned<DeploymentJob>",
+                "deploymentList" => "ConditionedList<DeploymentJob>",
+                "stage" => "Conditioned<Stage>",
+                "stageList" => "ConditionedList<Stage>",
+                _ => "TaskInputs?",
+            };
+
+            if (typeName?.ToString() == "number")
+            {
+                parameter.Default = (parameter.Default as string)?.Replace("\"", null);
+            }
+        }
+        else if (argument.TryGetValue("default", out var definedDefault))
+        {
+            (parameter.Type, parameter.Default) = ParseArgumentTypeAndDefault(definedDefault);
+        }
+
+        return parameter;
     }
 
     private static string GetRelativePath(string templatePath)
@@ -215,6 +293,8 @@ public partial class TemplateApiGenerator
     private static string GetNewContent(string namespaceName, string className) =>
         $$"""
         using Sharpliner.AzureDevOps;
+        using Sharpliner.AzureDevOps.ConditionedExpressions;
+        using Sharpliner.AzureDevOps.Tasks;
 
         namespace {{namespaceName}};
 
@@ -222,38 +302,6 @@ public partial class TemplateApiGenerator
         {
         }
         """;
-
-    private class ParsedTemplate
-    {
-        public Dictionary<string, object>? Parameters { get; set; }
-        public List<Dictionary<object, object>>? Stages { get; set; }
-        public List<Dictionary<object, object>>? Jobs { get; set; }
-        public List<Dictionary<object, object>>? Steps { get; set; }
-        public List<Dictionary<object, object>>? Variables { get; set; }
-    }
-
-    private class TemplateReferenceArgument
-    {
-        public string? Name { get; set; }
-        public string? Type { get; set; }
-        public object? Default { get; set; }
-    }
-
-    // We have to make sure that arguments with default values go first
-    private class TemplateReferenceArgumentComparer : IComparer<TemplateReferenceArgument>
-    {
-        public static readonly TemplateReferenceArgumentComparer Instance = new();
-
-        public int Compare(TemplateReferenceArgument? first, TemplateReferenceArgument? second)
-        {
-            if (first?.Default == null && second?.Default != null)
-                return -1;
-            if (first?.Default != null && second?.Default == null)
-                return 1;
-            else
-                return 0;
-        }
-    }
 
     [GeneratedRegex("[^a-zA-Z0-9_]")]
     private static partial Regex MethodSanitize();
