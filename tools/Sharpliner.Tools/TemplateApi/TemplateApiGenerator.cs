@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace Sharpliner.Tools.TemplateApi;
 
-public class TemplateApiGenerator
+public partial class TemplateApiGenerator
 {
     private string _newLine = Environment.NewLine;
 
@@ -29,8 +30,8 @@ public class TemplateApiGenerator
         _newLine = content.Contains("\r\n") ? "\r\n" : Environment.NewLine;
         var lines = content.Split(_newLine).ToList();
 
-        int start = lines.FindIndex(l => l.Contains("public static class " + className)) + 2;
-        int bodyLength = lines.Count - start - 1;
+        var start = lines.FindIndex(l => l.Contains("public static class " + className)) + 2;
+        var bodyLength = lines.Count - start - 1;
 
         var body = lines.Skip(start).Take(bodyLength).ToList();
         var newBody = AddOrUpdateMethod(templatePath, template, body);
@@ -42,7 +43,7 @@ public class TemplateApiGenerator
             .ToArray();
 
         var result = new List<string>();
-        string? previous = "_";
+        var previous = "_";
         foreach (var line in newContent)
         {
             if (string.IsNullOrEmpty(previous) && string.IsNullOrEmpty(line))
@@ -130,7 +131,10 @@ public class TemplateApiGenerator
             return Array.Empty<TemplateReferenceArgument>();
         }
 
-        return parsedTemplate.Parameters.Select(pair => GetArgument(pair.Key, pair.Value)).ToArray();
+        return parsedTemplate.Parameters
+            .Select(pair => GetArgument(pair.Key, pair.Value))
+            .Order(TemplateReferenceArgumentComparer.Instance)
+            .ToArray();
     }
 
     private static TemplateReferenceArgument GetArgument(string name, object value)
@@ -204,7 +208,8 @@ public class TemplateApiGenerator
     {
         var name = Path.GetFileNameWithoutExtension(templateName);
         name = (name[0] + "").ToUpperInvariant() + name[1..];
-        return name;
+        var rgx = MethodSanitize();
+        return rgx.Replace(name, string.Empty);
     }
 
     private static string GetNewContent(string namespaceName, string className) =>
@@ -233,4 +238,23 @@ public class TemplateApiGenerator
         public string? Type { get; set; }
         public object? Default { get; set; }
     }
+
+    // We have to make sure that arguments with default values go first
+    private class TemplateReferenceArgumentComparer : IComparer<TemplateReferenceArgument>
+    {
+        public static readonly TemplateReferenceArgumentComparer Instance = new();
+
+        public int Compare(TemplateReferenceArgument? first, TemplateReferenceArgument? second)
+        {
+            if (first?.Default == null && second?.Default != null)
+                return -1;
+            if (first?.Default != null && second?.Default == null)
+                return 1;
+            else
+                return 0;
+        }
+    }
+
+    [GeneratedRegex("[^a-zA-Z0-9_]")]
+    private static partial Regex MethodSanitize();
 }
