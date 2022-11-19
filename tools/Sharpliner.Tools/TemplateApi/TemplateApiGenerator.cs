@@ -130,25 +130,28 @@ public class TemplateApiGenerator
             return Array.Empty<TemplateReferenceArgument>();
         }
 
-        // TODO
-        return parsedTemplate.Parameters.Select(pair =>
-        {
-            return new TemplateReferenceArgument()
-            {
-                Name = pair.Key,
-                Type = "string",
-                Default = "\"foo\"",
-            };
-            //if (arg.TryGetValue("name", out var name) && name is string nameString)
-            //{
-            //    if (arg.TryGetValue("default", out var defaultValue))
-            //    {
-            //        return new TemplateReferenceArgument(nameString, defaultValue);
-            //    }
+        return parsedTemplate.Parameters.Select(pair => GetArgument(pair.Key, pair.Value)).ToArray();
+    }
 
-            //    return new TemplateReferenceArgument(nameString);
-            //}
-        }).ToArray();
+    private static TemplateReferenceArgument GetArgument(string name, object value)
+    {
+        var argument = new TemplateReferenceArgument()
+        {
+            Name = name
+        };
+
+        (argument.Type, argument.Default) = value switch
+        {
+            int i => ("int", i),
+            double d => ("double", d),
+            float f => ("float", f),
+            "true" or "false" => ("bool", ((string)value).ToLowerInvariant()),
+            string s => ("string", s is not null ? $"\"{s}\"" : null),
+            bool b => ("bool", b),
+            _ => ("MISSING_TYPE", (object?)null)
+        };
+
+        return argument;
     }
 
     private static string GetRelativePath(string templatePath)
