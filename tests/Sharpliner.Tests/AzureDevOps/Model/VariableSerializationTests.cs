@@ -16,17 +16,17 @@ public class VariableSerializationTests
                 Variable("Configuration", "Release"),     // Or we have this more YAML-like definition
                 Group("PR keyvault variables"),
 
-                If.Equal(variables["Build.Reason"], "PullRequest")
+                If.Equal(variables.Build.Reason, "PullRequest")
                     .Variable("TargetBranch", "$(System.PullRequest.SourceBranch)")
                     .Variable("IsPr", true),
 
                 If.And(Equal(variables["Build.SourceBranch"], "refs/heads/production"), NotEqual("Configuration", "Debug"))
                     .Variables(("PublishProfileFile", "Prod"), ("foo", "bar"))
-                    .If.NotEqual(variables["Build.Reason"], "PullRequest")
+                    .If.NotEqual(variables.Build.Reason, "PullRequest")
                         .Variable("AzureSubscription", "Int")
                         .Group("azure-int")
                     .EndIf
-                    .If.Equal(variables["Build.Reason"], "PullRequest")
+                    .If.Equal(variables.Build.Reason, "PullRequest")
                         .Variable("AzureSubscription", "Prod")
                         .Group("azure-prod"),
             }

@@ -23,7 +23,7 @@
     <NoWarn>$(NoWarn);CS1591;CA1822</NoWarn>
 
     <!-- This makes sure we incluse YamlDotNet.dll in the nuget -->
-    <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);IncludeYamlDotNetInNupkg</GenerateNuspecDependsOn>
+    <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);IncludeDependenciesInNupkg</GenerateNuspecDependsOn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -32,14 +32,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="YamlDotNet" Version="11.2.1" />
-    <PackageReference Include="Microsoft.Build.Framework" Version="17.1.0" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.1.0" />
+    <PackageReference Include="OneOf" Version="3.0.223" />
+    <PackageReference Include="OneOf.SourceGenerator" Version="3.0.223" />
+    <PackageReference Include="YamlDotNet" Version="12.0.2" />
+    <PackageReference Include="Microsoft.Build.Framework" Version="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.3.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="..\..\LICENSE" PackagePath="\" />
-    <Content Include="..\..\README.md" PackagePath="\" />
+    <Content Include="build\README.md" PackagePath="\" />
     <Content Include="build\Sharpliner.props" PackagePath="build\" />
     <Content Include="build\Sharpliner.targets" PackagePath="build\" />
   </ItemGroup>
@@ -48,7 +50,7 @@
     This Target makes sure we include YamlDotNet.dll in the NuGet as it will be needed by the task
     https://natemcmaster.com/blog/2017/11/11/msbuild-task-with-dependencies/#third-party-dependencies-and-nuget
   -->
-  <Target Name="IncludeYamlDotNetInNupkg">
+  <Target Name="IncludeDependenciesInNupkg">
     <!--
       The include needs to happen after output has been copied to build output folder
       but before NuGet generates a nuspec. See https://github.com/NuGet/Home/issues/4704.
@@ -59,14 +61,34 @@
         <Visible>false</Visible>
         <BuildAction>Content</BuildAction>
       </_PackageFiles>
-      
+
       <_PackageFiles Include="$(OutputPath)\net6.0\YamlDotNet.dll">
         <PackagePath>lib\net6.0</PackagePath>
         <Visible>false</Visible>
         <BuildAction>Content</BuildAction>
       </_PackageFiles>
-      
+
       <_PackageFiles Include="$(OutputPath)\net7.0\YamlDotNet.dll">
+        <PackagePath>lib\net7.0</PackagePath>
+        <Visible>false</Visible>
+        <BuildAction>Content</BuildAction>
+      </_PackageFiles>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_PackageFiles Include="$(OutputPath)\net5.0\OneOf.dll">
+        <PackagePath>lib\net5.0</PackagePath>
+        <Visible>false</Visible>
+        <BuildAction>Content</BuildAction>
+      </_PackageFiles>
+
+      <_PackageFiles Include="$(OutputPath)\net6.0\OneOf.dll">
+        <PackagePath>lib\net6.0</PackagePath>
+        <Visible>false</Visible>
+        <BuildAction>Content</BuildAction>
+      </_PackageFiles>
+
+      <_PackageFiles Include="$(OutputPath)\net7.0\OneOf.dll">
         <PackagePath>lib\net7.0</PackagePath>
         <Visible>false</Visible>
         <BuildAction>Content</BuildAction>

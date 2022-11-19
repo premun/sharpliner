@@ -2,7 +2,7 @@
 
 namespace Sharpliner.AzureDevOps;
 
-public sealed class VariablesReference
+public class VariablesReference
 {
     public VariableReference this[string variableName] => new(variableName);
 
@@ -168,6 +168,8 @@ public sealed class AgentVariableReference : VariableReferenceBase
 
 public sealed class BuildVariableReference : VariableReferenceBase
 {
+    internal static readonly BuildVariableReference Instance = new();
+
     protected override string Prefix => "Build.";
 
     internal BuildVariableReference()

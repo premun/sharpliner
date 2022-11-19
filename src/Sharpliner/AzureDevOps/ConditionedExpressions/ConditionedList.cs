@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Sharpliner.AzureDevOps.ConditionedExpressions;
@@ -8,9 +9,6 @@ namespace Sharpliner.AzureDevOps.ConditionedExpressions;
 /// </summary>
 public class ConditionedList<T> : List<Conditioned<T>>
 {
-    // Make sure we can for example assign a string into ConditionedDefinition<string>
-    public static implicit operator ConditionedList<T>(List<T> list) => new(list);
-
     public ConditionedList()
     {
     }
@@ -32,4 +30,9 @@ public class ConditionedList<T> : List<Conditioned<T>>
         item.SetIsList(true);
         base.Add(item);
     }
+
+    // Make sure we can for example assign common collection types into ConditionedList
+    public static implicit operator ConditionedList<T>(List<T> list) => new(list);
+    public static implicit operator ConditionedList<T>(T[] values) => new(values);
+    public static implicit operator ConditionedList<T>(ReadOnlyCollection<T> values) => new(values);
 }

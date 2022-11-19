@@ -6,7 +6,7 @@ using YamlDotNet.Serialization;
 
 namespace Sharpliner.AzureDevOps.ConditionedExpressions;
 
-public class VariableReference : IRuntimeExpression, ICompileTimeExpression, IMacroExpression, IYamlConvertible
+public class VariableReference : IRuntimeExpression, IMacroExpression, ICompileTimeExpression, IYamlConvertible
 {
     public string VariableName { get; }
 
@@ -17,9 +17,9 @@ public class VariableReference : IRuntimeExpression, ICompileTimeExpression, IMa
 
     public string RuntimeExpression => $"variables['{VariableName}']";
 
-    public string CompileTimeExpression => Condition.ExpressionStart + $"variables.{VariableName}" + Condition.ExpressionEnd;
-
     public string MacroExpression => $"$({VariableName})";
+
+    public string CompileTimeExpression => Condition.ExpressionStart + RuntimeExpression + Condition.ExpressionEnd;
 
     public override string ToString() => MacroExpression;
 

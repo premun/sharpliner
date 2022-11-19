@@ -1,17 +1,5 @@
-[![Build Status](https://dev.azure.com/premun/Sharpliner/_apis/build/status/sharpliner-pr?branchName=main)](https://dev.azure.com/premun/Sharpliner/_build/latest?definitionId=4&branchName=main) [![Nuget](https://img.shields.io/nuget/v/Sharpliner)](https://www.nuget.org/packages/Sharpliner/)
-
 Sharpliner is a .NET library that lets you use C# for Azure DevOps pipeline definition instead of YAML.
 Exchange YAML indentation problems for the type-safe environment of C# and let the intellisense speed up your work!
-
-- [Getting started](#getting-started)
-- [Example](#example)
-- [Sharpliner features](#sharpliner-features)
-  - [Intellisense](#intellisense)
-  - [Useful macros](#useful-macros)
-  - [Sourcing scripts from files](#sourcing-scripts-from-files)
-  - [Pipeline validation](#pipeline-validation)
-- [Something missing?](#something-missing)
-- [Developing Sharpliner](#developing-sharpliner)
 
 ## Getting started
 
@@ -109,27 +97,6 @@ However, this task's specification is quite long since the task does many things
     publishTestResults: true # Optional
     testRunTitle: # Optional
     zipAfterPublish: true # Optional
-    modifyOutputPath: true # Optional
-    feedsToUse: 'select' # Options: select, config
-    vstsFeed: # Required when feedsToUse == Select
-    feedRestore: # Required when command == restore. projectName/feedName for project-scoped feed. FeedName only for organization-scoped feed.
-    includeNuGetOrg: true # Required when feedsToUse == Select
-    nugetConfigPath: # Required when feedsToUse == Config
-    externalFeedCredentials: # Optional
-    noCache: false
-    restoreDirectory:
-    restoreArguments: # Optional
-    verbosityRestore: 'Detailed' # Options: -, quiet, minimal, normal, detailed, diagnostic
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg' # Required when command == Push
-    nuGetFeedType: 'internal' # Required when command == Push# Options: internal, external
-    publishVstsFeed: # Required when command == Push && NuGetFeedType == Internal
-    publishPackageMetadata: true # Optional
-    publishFeedCredentials: # Required when command == Push && NuGetFeedType == External
-    packagesToPack: '**/*.csproj' # Required when command == Pack
-    packDirectory: '$(Build.ArtifactStagingDirectory)' # Optional
-    nobuild: false # Optional
-    includesymbols: false # Optional
-    includesource: false # Optional
     versioningScheme: 'off' # Options: off, byPrereleaseNumber, byEnvVar, byBuildNumber
     versionEnvVar: # Required when versioningScheme == byEnvVar
     majorVersion: '1' # Required when versioningScheme == ByPrereleaseNumber
@@ -269,56 +236,4 @@ class YourCustomConfiguration : SharplinerConfiguration
         Hooks.AfterPublish = (definition, path) => {};
     }
 }
-```
-
-## Something missing?
-
-If you find a missing feature / API / property / use case, file an issue in project's repository.
-We try to be very responsive and for small asks can deliver you a new version very fast.
-
-If you want to start contributing, either you already know about something missing or you can choose from some of the open issues.
-We will help you review your first change so that you can continue with something advanced!
-
-Another way to start is to try out Sharpliner to define your own, already existing pipeline.
-This way you can uncover missing features or you can introduce shortcuts for definitions of build tasks or similar that you use frequently.
-Contributions like these are also very welcome!
-In these cases, it is worth starting with describing your intent in an issue first.
-
-## Developing Sharpliner
-
-Contributions are very welcome and if you find yourself opening the codebase there are couple of things you should know.
-The repository layout is quite simple:
-
-```bash
-.
-├── artifacts            # All build outputs go here. Nuke it to clean
-├── docs                 # Documentation
-├── eng                  # CI/CD for the repo
-│   ├── Sharpliner.CI    # C# definitions for pipelines of this repo
-│   └── pipelines        # YAML pipelines of the repository
-├── src
-│   └── Sharpliner       # Main Sharpliner project
-│       └── build        # Targets/props for the Sharpliner .nupkg
-├── tests
-│   ├── NuGet.Tests      # E2E tests using the Sharpliner  .nupkg
-│   └── Sharpliner.Tests # Unit tests for the main Sharpliner project
-└── Sharpliner.sln       # Main solution of the project
-```
-
-Developing is quite easy - open the `Sharpliner.sln` solution in VS. However, the solution won't build 100% the first time.
-This is because of the `Sharpliner.CI` project.
-This projects uses Sharpliner and defines pipelines for the Sharpliner repository - the YAML is published to `eng/pipelines`.
-This way we test quite many Sharpliner features right in the PR build.
-The `Sharpliner.CI` project expects that a package `Sharpliner.43.43.43.nupkg` is built locally which it then references it simulating the real usage of Sharpliner from `nuget.org`.
-
-To build all of the solution 100%, **you have to build `Sharpliner.CI` from console** as building inside VS won't work on cold checkout.
-This will package `Sharpliner.csproj` first and produce the `43.43.43` package:
-```
-> dotnet build eng/Sharpliner.CI/Sharpliner.CI.csproj
-```
-
-If you make changes to the main library and want to test it using `Sharpliner.CI`, clean and then build the CI project from console:
-```
-> dotnet clean eng/Sharpliner.CI/Sharpliner.CI.csproj
-> dotnet build eng/Sharpliner.CI/Sharpliner.CI.csproj
 ```

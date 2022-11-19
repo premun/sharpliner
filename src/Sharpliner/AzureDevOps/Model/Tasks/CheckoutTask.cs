@@ -21,11 +21,12 @@ public abstract record CheckoutTask : Step
 
     /// <summary>
     /// The depth of commits to ask Git to fetch.
-    /// Defaults to no limit.
+    /// Defaults to shallow fetch (= 1).
+    /// Set 0 to no limit (full clone).
     /// </summary>
     [YamlMember(Order = 101)]
-    [DefaultValue(0)]
-    public int FetchDepth { get; init; } = 0;
+    [DefaultValue(1)]
+    public int FetchDepth { get; init; } = 1;
 
     /// <summary>
     /// Whether to download Git-LFS files.

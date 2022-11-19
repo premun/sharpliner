@@ -1,8 +1,4 @@
-﻿[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "***")]
-[assembly: System.Resources.NeutralResourcesLanguage("en")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Sharpliner.Tests")]
-[assembly: System.Runtime.Versioning.TargetFramework(".NETCoreApp,Version=v7.0", FrameworkDisplayName="")]
-namespace Sharpliner.AzureDevOps
+﻿namespace Sharpliner.AzureDevOps
 {
     public sealed class AgentVariableReference : Sharpliner.AzureDevOps.VariableReferenceBase
     {
@@ -30,58 +26,30 @@ namespace Sharpliner.AzureDevOps
         protected static Sharpliner.AzureDevOps.Tasks.CheckoutTaskBuilder Checkout { get; }
         protected static Sharpliner.AzureDevOps.Tasks.DotNetTaskBuilder DotNet { get; }
         protected static Sharpliner.AzureDevOps.Tasks.DownloadTaskBuilder Download { get; }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.ConditionBuilder If { get; }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsNotPullRequest { get; }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsPullRequest { get; }
+        protected static Sharpliner.AzureDevOps.ConditionedExpressions.IfConditionBuilder If { get; }
+        protected static Sharpliner.AzureDevOps.InlineCondition IsNotPullRequest { get; }
+        protected static Sharpliner.AzureDevOps.InlineCondition IsPullRequest { get; }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<string> NoDependsOn { get; }
         protected static Sharpliner.AzureDevOps.Tasks.PowershellTaskBuilder Powershell { get; }
         protected static Sharpliner.AzureDevOps.Tasks.PowershellTaskBuilder Pwsh { get; }
         protected static Sharpliner.AzureDevOps.Tasks.ScriptTaskBuilder Script { get; }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition And(params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition And(params string[] expressions) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> And<T>(params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> And<T>(params string[] expressions) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition And(params Sharpliner.AzureDevOps.InlineCondition[] expressions) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition And(params string[] expressions) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition And<T>(params Sharpliner.AzureDevOps.InlineCondition[] expressions) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition<T> And<T>(params string[] expressions) { }
         protected static Sharpliner.AzureDevOps.Parameter BooleanParameter(string name, string? displayName = null, bool? defaultValue = default) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Condition(string condition) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Condition(string condition) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Contains<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression[] haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition ContainsValue<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression[] haystack) { }
         protected static Sharpliner.AzureDevOps.DeploymentJob DeploymentJob(string jobName, string? displayName = null) { }
         protected static Sharpliner.AzureDevOps.Parameter DeploymentListParameter(string name, string? displayName = null, Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<Sharpliner.AzureDevOps.DeploymentJob>? defaultValue = null) { }
         protected static Sharpliner.AzureDevOps.Parameter DeploymentParameter(string name, string? displayName = null, Sharpliner.AzureDevOps.DeploymentJob? defaultValue = null) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Equal<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Equal<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Equal<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Equal<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition EndsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Equal<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression2) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> ExpandJobs(params Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job>[] jobs) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> ExpandJobs(params Sharpliner.AzureDevOps.Job[] jobs) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> ExpandJobs(System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job>> jobs) { }
@@ -98,31 +66,13 @@ namespace Sharpliner.AzureDevOps
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> ExpandVariables(params Sharpliner.AzureDevOps.VariableBase[] variables) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> ExpandVariables(System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase>> variables) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> ExpandVariables(System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.VariableBase> variables) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Greater<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression2) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Group(string name) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition In<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression branchName) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsBranch(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression branchName) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsNotBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression branchName) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsNotBranch(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression branchName) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition In(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression[] haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition In<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression[] haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition IsBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression branchName) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition IsNotBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression branchName) { }
         protected static Sharpliner.AzureDevOps.Job Job(string jobName, string? displayName = null) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> JobLibrary(Sharpliner.AzureDevOps.JobLibrary library) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> JobLibrary<T>()
@@ -130,40 +80,18 @@ namespace Sharpliner.AzureDevOps
         protected static Sharpliner.AzureDevOps.Parameter JobListParameter(string name, string? displayName = null, Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<Sharpliner.AzureDevOps.JobBase>? defaultValue = null) { }
         protected static Sharpliner.AzureDevOps.Parameter JobParameter(string name, string? displayName = null, Sharpliner.AzureDevOps.JobBase? defaultValue = null) { }
         protected static Sharpliner.AzureDevOps.Template<Sharpliner.AzureDevOps.JobBase> JobTemplate(string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> NotEqual<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> NotEqual<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> NotEqual<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> NotEqual<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Less(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Less<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition NotEqual<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression[] haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition NotIn<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression[] haystack) { }
         protected static Sharpliner.AzureDevOps.Parameter NumberParameter(string name, string? displayName = null, int defaultValue = 0, System.Collections.Generic.IEnumerable<int?>? allowedValues = null) { }
         protected static Sharpliner.AzureDevOps.Parameter ObjectParameter(string name, string? displayName = null, Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedDictionary? defaultValue = null) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Or(params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Or(params string[] expressions) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Or<T>(params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Or<T>(params string[] expressions) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Or(params Sharpliner.AzureDevOps.InlineCondition[] expressions) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Or(params string[] expressions) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Or<T>(params Sharpliner.AzureDevOps.InlineCondition[] expressions) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Or<T>(params string[] expressions) { }
         protected static Sharpliner.AzureDevOps.Tasks.PublishTask Publish(string artifactName, string filePath, string? displayName = null) { }
         protected static Sharpliner.AzureDevOps.Stage Stage(string stageName, string? displayName = null) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> StageLibrary(Sharpliner.AzureDevOps.StageLibrary library) { }
@@ -172,14 +100,8 @@ namespace Sharpliner.AzureDevOps
         protected static Sharpliner.AzureDevOps.Parameter StageListParameter(string name, string? displayName = null, Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<Sharpliner.AzureDevOps.Stage>? defaultValue = null) { }
         protected static Sharpliner.AzureDevOps.Parameter StageParameter(string name, string? displayName = null, Sharpliner.AzureDevOps.Stage? defaultValue = null) { }
         protected static Sharpliner.AzureDevOps.Template<Sharpliner.AzureDevOps.Stage> StageTemplate(string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression haystack) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition StartsWith<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression haystack) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> StepLibrary(Sharpliner.AzureDevOps.StepLibrary library) { }
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> StepLibrary<T>()
             where T : Sharpliner.AzureDevOps.StepLibrary, new () { }
@@ -196,10 +118,10 @@ namespace Sharpliner.AzureDevOps
         protected static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> VariableLibrary<T>()
             where T : Sharpliner.AzureDevOps.VariableLibrary, new () { }
         protected static Sharpliner.AzureDevOps.Template<Sharpliner.AzureDevOps.VariableBase> VariableTemplate(string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Xor(Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Xor(string condition1, string condition2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Xor<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression2) { }
-        protected static Sharpliner.AzureDevOps.ConditionedExpressions.Condition Xor<T>(string expression1, string expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Xor(Sharpliner.AzureDevOps.InlineCondition expression1, Sharpliner.AzureDevOps.InlineCondition expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Xor(string condition1, string condition2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Xor<T>(Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression2) { }
+        protected static Sharpliner.AzureDevOps.InlineCondition Xor<T>(string expression1, string expression2) { }
     }
     public sealed class BooleanParameter : Sharpliner.AzureDevOps.Parameter<bool?>, System.IEquatable<Sharpliner.AzureDevOps.BooleanParameter>
     {
@@ -258,56 +180,55 @@ namespace Sharpliner.AzureDevOps
     }
     public static class ConditionExtensions
     {
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression AsRuntimeExpression(this string condition) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> DeploymentJob(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> job) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> DeploymentJob(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.JobBase job) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Group(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, string name) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> Job(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> job) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> Job(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.JobBase job) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> JobLibrary(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.JobLibrary library) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> JobLibrary<T>(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition)
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> DeploymentJob(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> job) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> DeploymentJob(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.JobBase job) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Group(this Sharpliner.AzureDevOps.IfCondition condition, string name) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> Job(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> job) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> Job(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.JobBase job) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> JobLibrary(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.JobLibrary library) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> JobLibrary<T>(this Sharpliner.AzureDevOps.IfCondition condition)
             where T : Sharpliner.AzureDevOps.JobLibrary, new () { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> JobTemplate(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> Jobs(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, params Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job>[] jobs) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> Jobs(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, params Sharpliner.AzureDevOps.Job[] jobs) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> Jobs(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job>> jobs) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> Jobs(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.Job> jobs) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Pool> Pool(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Pool> pool) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Pool> Pool(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.Pool pool) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stage(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> stage) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stage(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.Stage stage) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> StageLibrary(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.StageLibrary library) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> StageLibrary<T>(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition)
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.JobBase> JobTemplate(this Sharpliner.AzureDevOps.IfCondition condition, string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> Jobs(this Sharpliner.AzureDevOps.IfCondition condition, params Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job>[] jobs) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> Jobs(this Sharpliner.AzureDevOps.IfCondition condition, params Sharpliner.AzureDevOps.Job[] jobs) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> Jobs(this Sharpliner.AzureDevOps.IfCondition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job>> jobs) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Job> Jobs(this Sharpliner.AzureDevOps.IfCondition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.Job> jobs) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Pool> Pool(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Pool> pool) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Pool> Pool(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.Pool pool) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stage(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> stage) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stage(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.Stage stage) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> StageLibrary(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.StageLibrary library) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> StageLibrary<T>(this Sharpliner.AzureDevOps.IfCondition condition)
             where T : Sharpliner.AzureDevOps.StageLibrary, new () { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> StageTemplate(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stages(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, params Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage>[] stages) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stages(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, params Sharpliner.AzureDevOps.Stage[] stages) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stages(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage>> stages) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stages(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.Stage> stages) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Step(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> step) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Step(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.Step step) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> StepLibrary(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.StepLibrary library) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> StepLibrary<T>(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition)
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> StageTemplate(this Sharpliner.AzureDevOps.IfCondition condition, string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stages(this Sharpliner.AzureDevOps.IfCondition condition, params Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage>[] stages) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stages(this Sharpliner.AzureDevOps.IfCondition condition, params Sharpliner.AzureDevOps.Stage[] stages) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stages(this Sharpliner.AzureDevOps.IfCondition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage>> stages) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Stage> Stages(this Sharpliner.AzureDevOps.IfCondition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.Stage> stages) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Step(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> step) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Step(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.Step step) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> StepLibrary(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.StepLibrary library) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> StepLibrary<T>(this Sharpliner.AzureDevOps.IfCondition condition)
             where T : Sharpliner.AzureDevOps.StepLibrary, new () { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> StepTemplate(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Steps(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, params Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step>[] steps) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Steps(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, params Sharpliner.AzureDevOps.Step[] steps) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Steps(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step>> steps) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Steps(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.Step> steps) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Strategy> Strategy(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.Strategy strategy) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T> Value<T>(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, T value) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variable(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, string name, bool value) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variable(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, string name, int value) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variable(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, string name, string value) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> VariableLibrary(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, Sharpliner.AzureDevOps.VariableLibrary library) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> VariableLibrary<T>(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition)
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> StepTemplate(this Sharpliner.AzureDevOps.IfCondition condition, string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Steps(this Sharpliner.AzureDevOps.IfCondition condition, params Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step>[] steps) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Steps(this Sharpliner.AzureDevOps.IfCondition condition, params Sharpliner.AzureDevOps.Step[] steps) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Steps(this Sharpliner.AzureDevOps.IfCondition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step>> steps) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Step> Steps(this Sharpliner.AzureDevOps.IfCondition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.Step> steps) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.Strategy> Strategy(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.Strategy strategy) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T> Value<T>(this Sharpliner.AzureDevOps.IfCondition condition, T value) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variable(this Sharpliner.AzureDevOps.IfCondition condition, string name, bool value) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variable(this Sharpliner.AzureDevOps.IfCondition condition, string name, int value) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variable(this Sharpliner.AzureDevOps.IfCondition condition, string name, string value) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> VariableLibrary(this Sharpliner.AzureDevOps.IfCondition condition, Sharpliner.AzureDevOps.VariableLibrary library) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> VariableLibrary<T>(this Sharpliner.AzureDevOps.IfCondition condition)
             where T : Sharpliner.AzureDevOps.VariableLibrary, new () { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> VariableTemplate(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, params Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase>[] variables) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, params Sharpliner.AzureDevOps.VariableBase[] variables) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase>> variables) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.VariableBase> variables) { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition, [System.Runtime.CompilerServices.TupleElementNames(new string[] {
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> VariableTemplate(this Sharpliner.AzureDevOps.IfCondition condition, string path, Sharpliner.AzureDevOps.TemplateParameters? parameters = null) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.IfCondition condition, params Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase>[] variables) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.IfCondition condition, params Sharpliner.AzureDevOps.VariableBase[] variables) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.IfCondition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase>> variables) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.IfCondition condition, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.VariableBase> variables) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.VariableBase> Variables(this Sharpliner.AzureDevOps.IfCondition condition, [System.Runtime.CompilerServices.TupleElementNames(new string[] {
                 "name",
                 "value"})] params System.ValueTuple<string, object>[] variables) { }
     }
@@ -458,11 +379,60 @@ namespace Sharpliner.AzureDevOps
         Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<string> DependsOn { get; }
         string Name { get; }
     }
+    public abstract class IfCondition : Sharpliner.AzureDevOps.ConditionedExpressions.Condition
+    {
+        protected IfCondition() { }
+        public string WithoutTags() { }
+    }
+    public abstract class IfCondition<T> : Sharpliner.AzureDevOps.IfCondition
+    {
+        protected IfCondition(Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>? parent = null) { }
+    }
+    public abstract class IfStringCondition : Sharpliner.AzureDevOps.IfCondition
+    {
+        protected IfStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression two) { }
+        protected IfStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression two) { }
+        protected IfStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression two) { }
+        protected static string Serialize(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression arrayValue) { }
+        protected static string Serialize(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression stringOrVariableOrParameter) { }
+    }
+    public abstract class IfStringCondition<T> : Sharpliner.AzureDevOps.IfCondition<T>
+    {
+        protected IfStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression two, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>? parent = null) { }
+        protected IfStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression two, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>? parent = null) { }
+        protected IfStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression two, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>? parent = null) { }
+        protected static string Serialize(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression arrayValue) { }
+        protected static string Serialize(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression stringOrVariableOrParameter) { }
+    }
     public class InclusionRule : System.IEquatable<Sharpliner.AzureDevOps.InclusionRule>
     {
         public InclusionRule() { }
         public Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<string> Exclude { get; set; }
         public Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<string> Include { get; set; }
+    }
+    public abstract class InlineCondition : Sharpliner.AzureDevOps.ConditionedExpressions.Condition
+    {
+        protected InlineCondition() { }
+    }
+    public abstract class InlineCondition<T> : Sharpliner.AzureDevOps.InlineCondition
+    {
+        protected InlineCondition(Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>? parent = null) { }
+    }
+    public abstract class InlineStringCondition : Sharpliner.AzureDevOps.InlineCondition
+    {
+        protected InlineStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression two) { }
+        protected InlineStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression two) { }
+        protected InlineStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression two) { }
+        protected static string Serialize(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression arrayValue) { }
+        protected static string Serialize(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression stringOrVariableOrParameter) { }
+    }
+    public abstract class InlineStringCondition<T> : Sharpliner.AzureDevOps.InlineCondition<T>
+    {
+        protected InlineStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression two, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>? parent = null) { }
+        protected InlineStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression two, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>? parent = null) { }
+        protected InlineStringCondition(string keyword, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression one, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression two, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>? parent = null) { }
+        protected static string Serialize(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression arrayValue) { }
+        protected static string Serialize(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression stringOrVariableOrParameter) { }
     }
     public class Job : Sharpliner.AzureDevOps.JobBase, System.IEquatable<Sharpliner.AzureDevOps.Job>
     {
@@ -484,7 +454,7 @@ namespace Sharpliner.AzureDevOps
         [YamlDotNet.Serialization.YamlMember(Order=900)]
         public int? CancelTimeoutInMinutes { get; }
         [YamlDotNet.Serialization.YamlMember(Order=1100)]
-        public string? Condition { get; set; }
+        public Sharpliner.AzureDevOps.InlineCondition? Condition { get; set; }
         [YamlDotNet.Serialization.YamlMember(Order=500)]
         public Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<Sharpliner.AzureDevOps.ContainerReference>? Container { get; set; }
         [YamlDotNet.Serialization.YamlMember(Order=1200)]
@@ -757,6 +727,10 @@ namespace Sharpliner.AzureDevOps
         public Sharpliner.AzureDevOps.Trigger? Trigger { get; set; }
         [YamlDotNet.Serialization.YamlIgnore]
         public Sharpliner.AzureDevOps.RepositoryType Type { get; set; }
+        public static Sharpliner.AzureDevOps.RepositoryResource AzureDevOps(string identifier, string project, string repoName, string? endpoint = null, string? refName = null) { }
+        public static Sharpliner.AzureDevOps.RepositoryResource BitBucket(string identifier, string orgOrUser, string repoName, string endpoint, string? refName = null) { }
+        public static Sharpliner.AzureDevOps.RepositoryResource GitHub(string identifier, string orgOrUser, string repoName, string endpoint, string? refName = null) { }
+        public static Sharpliner.AzureDevOps.RepositoryResource GitHubEnterprise(string identifier, string orgOrUser, string repoName, string endpoint, string? refName = null) { }
     }
     public enum RepositoryType
     {
@@ -842,7 +816,7 @@ namespace Sharpliner.AzureDevOps
     {
         public Stage(string name, string? displayName = null) { }
         [YamlDotNet.Serialization.YamlMember(Order=400)]
-        public string? Condition { get; set; }
+        public Sharpliner.AzureDevOps.InlineCondition? Condition { get; set; }
         [YamlDotNet.Serialization.YamlMember(Order=100)]
         public Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<string> DependsOn { get; set; }
         [YamlDotNet.Serialization.YamlMember(Order=2)]
@@ -880,7 +854,7 @@ namespace Sharpliner.AzureDevOps
     {
         protected Step() { }
         [YamlDotNet.Serialization.YamlMember(Order=190)]
-        public string? Condition { get; set; }
+        public Sharpliner.AzureDevOps.InlineCondition? Condition { get; set; }
         [YamlDotNet.Serialization.YamlMember(Order=200)]
         public bool ContinueOnError { get; set; }
         [YamlDotNet.Serialization.YamlMember(Order=100)]
@@ -1090,7 +1064,7 @@ namespace Sharpliner.AzureDevOps
         protected VariableTemplateDefinition() { }
         public virtual System.Collections.Generic.IReadOnlyCollection<Sharpliner.Common.IDefinitionValidation> Validations { get; }
     }
-    public sealed class VariablesReference
+    public class VariablesReference
     {
         public VariablesReference() { }
         public Sharpliner.AzureDevOps.AgentVariableReference Agent { get; }
@@ -1112,167 +1086,70 @@ namespace Sharpliner.AzureDevOps
         public string Identifier { get; }
     }
 }
+namespace Sharpliner.AzureDevOps.ConditionedExpressions.Arguments
+{
+    public class IfArrayExpression : OneOf.OneOfBase<string[], object[], Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference[], Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference[]>
+    {
+        public IfArrayExpression(OneOf.OneOf<string[], object[], Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference[], Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference[]> _) { }
+        public static string[] op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression _) { }
+        public static object[] op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference[] op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference[] op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference[] _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference[] _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression op_Implicit(object[] _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfArrayExpression op_Implicit(string[] _) { }
+    }
+    public class IfExpression : OneOf.OneOfBase<string, Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference, Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference>
+    {
+        public IfExpression(OneOf.OneOf<string, Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference, Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference> _) { }
+        public static string op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression op_Implicit(string _) { }
+    }
+    public class InlineArrayExpression : OneOf.OneOfBase<string[], object[], Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference[], Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference[]>
+    {
+        public InlineArrayExpression(OneOf.OneOf<string[], object[], Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference[], Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference[]> _) { }
+        public static string[] op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression _) { }
+        public static object[] op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference[] op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference[] op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference[] _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference[] _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression op_Implicit(object[] _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineArrayExpression op_Implicit(string[] _) { }
+    }
+    public class InlineExpression : OneOf.OneOfBase<string, Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference, Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference>
+    {
+        public InlineExpression(OneOf.OneOf<string, Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference, Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference> _) { }
+        public static string op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference op_Explicit(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference _) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.InlineExpression op_Implicit(string _) { }
+    }
+}
 namespace Sharpliner.AzureDevOps.ConditionedExpressions
 {
-    public class AndCondition : Sharpliner.AzureDevOps.ConditionedExpressions.Condition { }
-    public class AndCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> { }
-    public class BranchCondition : Sharpliner.AzureDevOps.ConditionedExpressions.EqualityCondition { }
-    public class BranchCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.EqualityCondition<T> { }
-    public class BuildReasonCondition : Sharpliner.AzureDevOps.ConditionedExpressions.EqualityCondition { }
-    public class BuildReasonCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.EqualityCondition<T> { }
-    public abstract class Condition
+    public abstract class Condition : YamlDotNet.Serialization.IYamlConvertible
     {
         protected const string ElseTagStart = "${{ else";
-        protected readonly string _condition;
-        protected Condition(string condition) { }
-        protected Condition(string keyword, bool requireTwoPlus, params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        protected Condition(string keyword, bool requireTwoPlus, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] expressions) { }
-        protected Condition(string keyword, bool requireTwoPlus, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression> expressions) { }
-        protected Condition(string keyword, bool requireTwoPlus, System.Collections.Generic.IEnumerable<string> expressions) { }
-        protected Condition(string keyword, bool requireTwoPlus, params string[] expressions) { }
+        protected const string IfTagStart = "${{ if ";
+        protected Condition() { }
+        public void Read(YamlDotNet.Core.IParser parser, System.Type expectedType, YamlDotNet.Serialization.ObjectDeserializer nestedObjectDeserializer) { }
         public override string ToString() { }
-        protected static string BuildExpression(string keyword, params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        protected static string BuildExpression(string keyword, System.Collections.Generic.IEnumerable<string> expressions) { }
-        protected static string BuildExpression(string keyword, params string[] expressions) { }
-        public static string RemoveTags(Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition) { }
-        public static string RemoveTags(string condition) { }
-        protected static string WrapQuotes(string value) { }
+        public void Write(YamlDotNet.Core.IEmitter emitter, YamlDotNet.Serialization.ObjectSerializer nestedObjectSerializer) { }
+        public static string Join(System.Collections.Generic.IEnumerable<string> expressions) { }
+        public static string WrapQuotes(string value) { }
         public static string op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.Condition value) { }
-    }
-    public class ConditionBuilder
-    {
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsNotPullRequest { get; }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsPullRequest { get; }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition And(params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition And(params string[] expressions) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Condition(string condition) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression branchName) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsBranch(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression branchName) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsNotBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression branchName) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition IsNotBranch(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression branchName) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Less(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Condition condition) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Or(params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Or(params string[] expressions) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Xor(Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition Xor(string expression1, string expression2) { }
-    }
-    public class ConditionBuilder<T>
-    {
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> IsNotPullRequest { get; }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> IsPullRequest { get; }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> And(params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> And(params string[] expressions) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Contains(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Contains(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Contains(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Contains(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Equal(string condition) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Equal(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Equal(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Greater(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Greater(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Greater(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Greater(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition In(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> IsBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression branchName) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> IsBranch(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression branchName) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> IsNotBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression branchName) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> IsNotBranch(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression branchName) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Less(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Less(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Less(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Less(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression second) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, params object[] haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Or(params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Or(params string[] expressions) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression haystack) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Xor(Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Condition expression2) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Xor(string expression1, string expression2) { }
-    }
-    public abstract class Condition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.Condition
-    {
-        protected Condition(string condition, Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>? parent = null) { }
-        protected Condition(string keyword, bool requireTwoPlus, params Sharpliner.AzureDevOps.ConditionedExpressions.Condition[] expressions) { }
-        protected Condition(string keyword, bool requireTwoPlus, System.Collections.Generic.IEnumerable<string> expressions) { }
-        protected Condition(string keyword, bool requireTwoPlus, params string[] expressions) { }
     }
     public abstract class Conditioned : System.IEquatable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned>, YamlDotNet.Serialization.IYamlConvertible
     {
-        protected Conditioned(Sharpliner.AzureDevOps.ConditionedExpressions.Condition? condition) { }
+        protected Conditioned(Sharpliner.AzureDevOps.IfCondition? condition) { }
         public void Read(YamlDotNet.Core.IParser parser, System.Type expectedType, YamlDotNet.Serialization.ObjectDeserializer nestedObjectDeserializer) { }
         public abstract void Write(YamlDotNet.Core.IEmitter emitter, YamlDotNet.Serialization.ObjectSerializer nestedObjectSerializer);
     }
@@ -1287,53 +1164,157 @@ namespace Sharpliner.AzureDevOps.ConditionedExpressions
         protected ConditionedList(System.Collections.Generic.IEnumerable<T> values) { }
         public void Add(Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T> item) { }
         public static Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<T> op_Implicit(System.Collections.Generic.List<T> list) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<T> op_Implicit(System.Collections.ObjectModel.ReadOnlyCollection<T> values) { }
+        public static Sharpliner.AzureDevOps.ConditionedExpressions.ConditionedList<T> op_Implicit(T[] values) { }
     }
     public class Conditioned<T> : Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned, System.IEquatable<Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T>>
     {
         protected Conditioned() { }
-        protected Conditioned(Sharpliner.AzureDevOps.ConditionedExpressions.Condition? condition) { }
+        protected Conditioned(Sharpliner.AzureDevOps.IfCondition? condition) { }
         public Conditioned(T definition) { }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> Else { get; }
+        public Sharpliner.AzureDevOps.IfCondition<T> Else { get; }
         public Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T> EndIf { get; }
-        public Sharpliner.AzureDevOps.ConditionedExpressions.ConditionBuilder<T> If { get; }
+        public Sharpliner.AzureDevOps.ConditionedExpressions.IfConditionBuilder<T> If { get; }
         protected virtual void SerializeSelf(YamlDotNet.Core.IEmitter emitter, YamlDotNet.Serialization.ObjectSerializer nestedObjectSerializer) { }
         public override string ToString() { }
         public override void Write(YamlDotNet.Core.IEmitter emitter, YamlDotNet.Serialization.ObjectSerializer nestedObjectSerializer) { }
         public static Sharpliner.AzureDevOps.ConditionedExpressions.Conditioned<T> op_Implicit(T value) { }
     }
-    public class ContainsCondition : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition { }
-    public class ContainsCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition<T> { }
-    public class ContainsValueCondition : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition { }
-    public class ContainsValueCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition<T> { }
-    public class CustomCondition : Sharpliner.AzureDevOps.ConditionedExpressions.Condition
-    {
-        public CustomCondition(string condition) { }
-    }
-    public class CustomCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T>
-    {
-        public CustomCondition(string condition) { }
-    }
-    public class ElseCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T>
+    public class ElseCondition<T> : Sharpliner.AzureDevOps.IfCondition<T>
     {
         public override string ToString() { }
         public static string op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.ElseCondition<T> value) { }
     }
-    public class EndsWithCondition : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition { }
-    public class EndsWithCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition<T> { }
-    public class EqualityCondition : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition { }
-    public class EqualityCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition<T> { }
-    public class GreaterCondition : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition { }
-    public class GreaterCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition<T> { }
-    public class InCondition : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition { }
-    public class InCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition<T> { }
-    public class LessCondition : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition { }
-    public class LessCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition<T> { }
-    public class NotCondition : Sharpliner.AzureDevOps.ConditionedExpressions.Condition { }
-    public class NotCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> { }
-    public class NotInCondition : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition { }
-    public class NotInCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition<T> { }
-    public class OrCondition : Sharpliner.AzureDevOps.ConditionedExpressions.Condition { }
-    public class OrCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> { }
+    public class IfAndCondition : Sharpliner.AzureDevOps.ConditionedExpressions.IfConjunctionCondition { }
+    public class IfAndCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.IfConjunctionCondition<T> { }
+    public class IfBranchCondition : Sharpliner.AzureDevOps.ConditionedExpressions.IfEqualityCondition { }
+    public class IfBranchCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.IfEqualityCondition<T> { }
+    public class IfBuildReasonCondition : Sharpliner.AzureDevOps.ConditionedExpressions.IfEqualityCondition { }
+    public class IfBuildReasonCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.IfEqualityCondition<T> { }
+    public class IfConditionBuilder
+    {
+        public Sharpliner.AzureDevOps.IfCondition IsNotPullRequest { get; }
+        public Sharpliner.AzureDevOps.IfCondition IsPullRequest { get; }
+        public Sharpliner.AzureDevOps.IfCondition And(params Sharpliner.AzureDevOps.IfCondition[] expressions) { }
+        public Sharpliner.AzureDevOps.IfCondition And(params string[] expressions) { }
+        public Sharpliner.AzureDevOps.IfCondition Condition(string condition) { }
+        public Sharpliner.AzureDevOps.IfCondition Contains(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression[] haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition Equal(Sharpliner.AzureDevOps.IfCondition condition) { }
+        public Sharpliner.AzureDevOps.IfCondition Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression expression2) { }
+        public Sharpliner.AzureDevOps.IfCondition Greater(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression second) { }
+        public Sharpliner.AzureDevOps.IfCondition In(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression[] haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition IsBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression branchName) { }
+        public Sharpliner.AzureDevOps.IfCondition IsNotBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression branchName) { }
+        public Sharpliner.AzureDevOps.IfCondition Less(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression second) { }
+        public Sharpliner.AzureDevOps.IfCondition NotEqual(Sharpliner.AzureDevOps.IfCondition condition) { }
+        public Sharpliner.AzureDevOps.IfCondition NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression expression2) { }
+        public Sharpliner.AzureDevOps.IfCondition NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression[] haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition Or(params Sharpliner.AzureDevOps.IfCondition[] expressions) { }
+        public Sharpliner.AzureDevOps.IfCondition Or(params string[] expressions) { }
+        public Sharpliner.AzureDevOps.IfCondition StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition Xor(Sharpliner.AzureDevOps.IfCondition expression1, Sharpliner.AzureDevOps.IfCondition expression2) { }
+        public Sharpliner.AzureDevOps.IfCondition Xor(string expression1, string expression2) { }
+    }
+    public class IfConditionBuilder<T>
+    {
+        public Sharpliner.AzureDevOps.IfCondition<T> IsNotPullRequest { get; }
+        public Sharpliner.AzureDevOps.IfCondition<T> IsPullRequest { get; }
+        public Sharpliner.AzureDevOps.IfCondition<T> And(params Sharpliner.AzureDevOps.IfCondition[] expressions) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> And(params string[] expressions) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> Contains(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> ContainsValue(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression[] haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> EndsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> Equal(string condition) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> Equal(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression expression2) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> Greater(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression second) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> In(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> IsBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression branchName) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> IsNotBranch(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression branchName) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> Less(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression first, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression second) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> NotEqual(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression expression1, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression expression2) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> NotIn(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, params Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression[] haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> Or(params Sharpliner.AzureDevOps.IfCondition[] expressions) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> Or(params string[] expressions) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> StartsWith(Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression needle, Sharpliner.AzureDevOps.ConditionedExpressions.Arguments.IfExpression haystack) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> Xor(Sharpliner.AzureDevOps.IfCondition expression1, Sharpliner.AzureDevOps.IfCondition expression2) { }
+        public Sharpliner.AzureDevOps.IfCondition<T> Xor(string expression1, string expression2) { }
+    }
+    public class IfConjunctionCondition : Sharpliner.AzureDevOps.IfCondition { }
+    public class IfConjunctionCondition<T> : Sharpliner.AzureDevOps.IfCondition<T> { }
+    public class IfContainsCondition : Sharpliner.AzureDevOps.IfStringCondition { }
+    public class IfContainsCondition<T> : Sharpliner.AzureDevOps.IfStringCondition<T> { }
+    public class IfContainsValueCondition : Sharpliner.AzureDevOps.IfStringCondition { }
+    public class IfContainsValueCondition<T> : Sharpliner.AzureDevOps.IfStringCondition<T> { }
+    public class IfCustomCondition : Sharpliner.AzureDevOps.IfCondition
+    {
+        public IfCustomCondition(string condition) { }
+    }
+    public class IfCustomCondition<T> : Sharpliner.AzureDevOps.IfCondition<T>
+    {
+        public IfCustomCondition(string condition) { }
+    }
+    public class IfEndsWithCondition : Sharpliner.AzureDevOps.IfStringCondition { }
+    public class IfEndsWithCondition<T> : Sharpliner.AzureDevOps.IfStringCondition<T> { }
+    public class IfEqualityCondition : Sharpliner.AzureDevOps.IfStringCondition { }
+    public class IfEqualityCondition<T> : Sharpliner.AzureDevOps.IfStringCondition<T> { }
+    public class IfGreaterCondition : Sharpliner.AzureDevOps.IfStringCondition { }
+    public class IfGreaterCondition<T> : Sharpliner.AzureDevOps.IfStringCondition<T> { }
+    public class IfInCondition : Sharpliner.AzureDevOps.IfStringCondition { }
+    public class IfInCondition<T> : Sharpliner.AzureDevOps.IfStringCondition<T> { }
+    public class IfLessCondition : Sharpliner.AzureDevOps.IfStringCondition { }
+    public class IfLessCondition<T> : Sharpliner.AzureDevOps.IfStringCondition<T> { }
+    public class IfNotCondition : Sharpliner.AzureDevOps.IfCondition { }
+    public class IfNotCondition<T> : Sharpliner.AzureDevOps.IfCondition<T> { }
+    public class IfNotInCondition : Sharpliner.AzureDevOps.IfStringCondition { }
+    public class IfNotInCondition<T> : Sharpliner.AzureDevOps.IfStringCondition<T> { }
+    public class IfOrCondition : Sharpliner.AzureDevOps.ConditionedExpressions.IfConjunctionCondition { }
+    public class IfOrCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.IfConjunctionCondition<T> { }
+    public class IfStartsWithCondition : Sharpliner.AzureDevOps.IfStringCondition { }
+    public class IfStartsWithCondition<T> : Sharpliner.AzureDevOps.IfStringCondition<T> { }
+    public class IfXorCondition : Sharpliner.AzureDevOps.ConditionedExpressions.IfConjunctionCondition { }
+    public class IfXorCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.IfConjunctionCondition<T> { }
+    public class InlineAndCondition : Sharpliner.AzureDevOps.ConditionedExpressions.InlineConjunctionCondition { }
+    public class InlineAndCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.InlineConjunctionCondition<T> { }
+    public class InlineBranchCondition : Sharpliner.AzureDevOps.ConditionedExpressions.InlineEqualityCondition { }
+    public class InlineBranchCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.InlineEqualityCondition<T> { }
+    public class InlineBuildReasonCondition : Sharpliner.AzureDevOps.ConditionedExpressions.InlineEqualityCondition { }
+    public class InlineBuildReasonCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.InlineEqualityCondition<T> { }
+    public class InlineConjunctionCondition : Sharpliner.AzureDevOps.InlineCondition { }
+    public class InlineConjunctionCondition<T> : Sharpliner.AzureDevOps.InlineCondition<T> { }
+    public class InlineContainsCondition : Sharpliner.AzureDevOps.InlineStringCondition { }
+    public class InlineContainsCondition<T> : Sharpliner.AzureDevOps.InlineStringCondition<T> { }
+    public class InlineContainsValueCondition : Sharpliner.AzureDevOps.InlineStringCondition { }
+    public class InlineContainsValueCondition<T> : Sharpliner.AzureDevOps.InlineStringCondition<T> { }
+    public class InlineCustomCondition : Sharpliner.AzureDevOps.InlineCondition
+    {
+        public InlineCustomCondition(string condition) { }
+    }
+    public class InlineCustomCondition<T> : Sharpliner.AzureDevOps.InlineCondition<T>
+    {
+        public InlineCustomCondition(string condition) { }
+    }
+    public class InlineEndsWithCondition : Sharpliner.AzureDevOps.InlineStringCondition { }
+    public class InlineEndsWithCondition<T> : Sharpliner.AzureDevOps.InlineStringCondition<T> { }
+    public class InlineEqualityCondition : Sharpliner.AzureDevOps.InlineStringCondition { }
+    public class InlineEqualityCondition<T> : Sharpliner.AzureDevOps.InlineStringCondition<T> { }
+    public class InlineGreaterCondition : Sharpliner.AzureDevOps.InlineStringCondition { }
+    public class InlineGreaterCondition<T> : Sharpliner.AzureDevOps.InlineStringCondition<T> { }
+    public class InlineInCondition : Sharpliner.AzureDevOps.InlineStringCondition { }
+    public class InlineInCondition<T> : Sharpliner.AzureDevOps.InlineStringCondition<T> { }
+    public class InlineLessCondition : Sharpliner.AzureDevOps.InlineStringCondition { }
+    public class InlineLessCondition<T> : Sharpliner.AzureDevOps.InlineStringCondition<T> { }
+    public class InlineNotCondition : Sharpliner.AzureDevOps.InlineCondition { }
+    public class InlineNotCondition<T> : Sharpliner.AzureDevOps.InlineCondition<T> { }
+    public class InlineNotInCondition : Sharpliner.AzureDevOps.InlineStringCondition { }
+    public class InlineNotInCondition<T> : Sharpliner.AzureDevOps.InlineStringCondition<T> { }
+    public class InlineOrCondition : Sharpliner.AzureDevOps.ConditionedExpressions.InlineConjunctionCondition { }
+    public class InlineOrCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.InlineConjunctionCondition<T> { }
+    public class InlineStartsWithCondition : Sharpliner.AzureDevOps.InlineStringCondition { }
+    public class InlineStartsWithCondition<T> : Sharpliner.AzureDevOps.InlineStringCondition<T> { }
+    public class InlineXorCondition : Sharpliner.AzureDevOps.ConditionedExpressions.InlineConjunctionCondition { }
+    public class InlineXorCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.InlineConjunctionCondition<T> { }
     public class ParameterReference : Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.ICompileTimeExpression, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression, YamlDotNet.Serialization.IYamlConvertible
     {
         public string CompileTimeExpression { get; }
@@ -1343,24 +1324,6 @@ namespace Sharpliner.AzureDevOps.ConditionedExpressions
         public override string ToString() { }
         public void Write(YamlDotNet.Core.IEmitter emitter, YamlDotNet.Serialization.ObjectSerializer nestedObjectSerializer) { }
         public static string op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.ParameterReference value) { }
-    }
-    public class StartsWithCondition : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition { }
-    public class StartsWithCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.StringCondition<T> { }
-    public abstract class StringCondition : Sharpliner.AzureDevOps.ConditionedExpressions.Condition
-    {
-        protected StringCondition(string keyword, bool requireTwoPlus, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] expressions) { }
-        protected StringCondition(string keyword, bool requireTwoPlus, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression> expressions) { }
-    }
-    public abstract class StringCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T>
-    {
-        protected StringCondition(string keyword, bool requireTwoPlus, params Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression[] expressions) { }
-        protected StringCondition(string keyword, bool requireTwoPlus, System.Collections.Generic.IEnumerable<Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression> expressions) { }
-    }
-    public class StringRuntimeExpression : Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression
-    {
-        public string RuntimeExpression { get; }
-        public override string ToString() { }
-        public static Sharpliner.AzureDevOps.ConditionedExpressions.StringRuntimeExpression op_Implicit(string value) { }
     }
     public class VariableReference : Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.ICompileTimeExpression, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IMacroExpression, Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces.IRuntimeExpression, YamlDotNet.Serialization.IYamlConvertible
     {
@@ -1373,8 +1336,6 @@ namespace Sharpliner.AzureDevOps.ConditionedExpressions
         public void Write(YamlDotNet.Core.IEmitter emitter, YamlDotNet.Serialization.ObjectSerializer nestedObjectSerializer) { }
         public static string op_Implicit(Sharpliner.AzureDevOps.ConditionedExpressions.VariableReference value) { }
     }
-    public class XorCondition : Sharpliner.AzureDevOps.ConditionedExpressions.Condition { }
-    public class XorCondition<T> : Sharpliner.AzureDevOps.ConditionedExpressions.Condition<T> { }
 }
 namespace Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces
 {
@@ -1466,7 +1427,7 @@ namespace Sharpliner.AzureDevOps.Tasks
         [System.ComponentModel.DefaultValue(false)]
         [YamlDotNet.Serialization.YamlMember(Order=100)]
         public bool Clean { get; set; }
-        [System.ComponentModel.DefaultValue(0)]
+        [System.ComponentModel.DefaultValue(1)]
         [YamlDotNet.Serialization.YamlMember(Order=101)]
         public int FetchDepth { get; set; }
         [System.ComponentModel.DefaultValue(false)]

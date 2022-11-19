@@ -50,7 +50,7 @@ public abstract record Step
     /// </summary>
     [YamlMember(Order = 190)]
     [DisallowNull]
-    public string? Condition { get; init; }
+    public InlineCondition? Condition { get; init; }
 
     /// <summary>
     /// Whether future steps should run even if this step fails.
@@ -85,7 +85,7 @@ public abstract record Step
     /// </summary>
     public Step When(string condition) => this with
     {
-        Condition = ConditionedExpressions.Condition.RemoveTags(condition)
+        Condition = new InlineCustomCondition(condition)
     };
 
     /// <summary>

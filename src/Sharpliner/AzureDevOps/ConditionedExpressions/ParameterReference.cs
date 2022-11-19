@@ -17,7 +17,7 @@ public class ParameterReference : IRuntimeExpression, ICompileTimeExpression, IY
 
     public string RuntimeExpression => $"parameters.{ParameterName}";
 
-    public string CompileTimeExpression => Condition.ExpressionStart + $"parameters.{ParameterName}" + Condition.ExpressionEnd;
+    public string CompileTimeExpression => Condition.ExpressionStart + RuntimeExpression + Condition.ExpressionEnd;
 
     public override string ToString() => CompileTimeExpression;
 

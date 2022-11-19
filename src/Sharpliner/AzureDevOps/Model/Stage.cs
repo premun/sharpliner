@@ -42,7 +42,7 @@ public record Stage : IDependsOn
 
     [YamlMember(Order = 400)]
     [DisallowNull]
-    public string? Condition { get; init; }
+    public InlineCondition? Condition { get; init; }
 
     public Stage(string name, string? displayName = null)
     {

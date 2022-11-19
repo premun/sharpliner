@@ -84,7 +84,7 @@ public abstract record JobBase : IDependsOn
 
     [YamlMember(Order = 1100)]
     [DisallowNull]
-    public string? Condition { get; init; }
+    public InlineCondition? Condition { get; init; }
 
     /// <summary>
     /// 'true' if future jobs should run even if this job fails

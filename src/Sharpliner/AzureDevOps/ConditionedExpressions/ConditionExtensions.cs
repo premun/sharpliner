@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Sharpliner.AzureDevOps.ConditionedExpressions;
-using Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces;
 
 namespace Sharpliner.AzureDevOps;
 
@@ -13,7 +12,7 @@ public static class ConditionExtensions
     /// <param name="condition">Conditioned definition</param>
     /// <param name="name">Variable name</param>
     /// <param name="value">Variable value</param>
-    public static Conditioned<VariableBase> Variable(this Condition condition, string name, string value)
+    public static Conditioned<VariableBase> Variable(this IfCondition condition, string name, string value)
         => Conditioned.Link<VariableBase>(condition, new Variable(name, value));
 
     /// <summary>
@@ -22,7 +21,7 @@ public static class ConditionExtensions
     /// <param name="condition">Conditioned definition</param>
     /// <param name="name">Variable name</param>
     /// <param name="value">Variable value</param>
-    public static Conditioned<VariableBase> Variable(this Condition condition, string name, bool value)
+    public static Conditioned<VariableBase> Variable(this IfCondition condition, string name, bool value)
         => Conditioned.Link<VariableBase>(condition, new Variable(name, value));
 
     /// <summary>
@@ -31,7 +30,7 @@ public static class ConditionExtensions
     /// <param name="condition">Conditioned definition</param>
     /// <param name="name">Variable name</param>
     /// <param name="value">Variable value</param>
-    public static Conditioned<VariableBase> Variable(this Condition condition, string name, int value)
+    public static Conditioned<VariableBase> Variable(this IfCondition condition, string name, int value)
         => Conditioned.Link<VariableBase>(condition, new Variable(name, value));
 
     /// <summary>
@@ -40,7 +39,7 @@ public static class ConditionExtensions
     /// <param name="condition">Conditioned definition</param>
     /// <param name="variables">List of (key, value) pairs</param>
     public static Conditioned<VariableBase> Variables(
-        this Condition condition,
+        this IfCondition condition,
         params (string name, object value)[] variables)
     {
         var (name, value) = variables.First();
@@ -63,67 +62,67 @@ public static class ConditionExtensions
     /// <summary>
     /// References a variable group.
     /// </summary>
-    public static Conditioned<VariableBase> Group(this Condition condition, string name)
+    public static Conditioned<VariableBase> Group(this IfCondition condition, string name)
         => Conditioned.Link<VariableBase>(condition, new VariableGroup(name));
 
     /// <summary>
     /// Creates a new stage.
     /// </summary>
-    public static Conditioned<Stage> Stage(this Condition condition, Stage stage)
+    public static Conditioned<Stage> Stage(this IfCondition condition, Stage stage)
         => Conditioned.Link(condition, stage);
 
     /// <summary>
     /// Creates a new stage.
     /// </summary>
-    public static Conditioned<Stage> Stage(this Condition condition, Conditioned<Stage> stage)
+    public static Conditioned<Stage> Stage(this IfCondition condition, Conditioned<Stage> stage)
         => Conditioned.Link(condition, stage);
 
     /// <summary>
     /// Creates a new job.
     /// </summary>
-    public static Conditioned<JobBase> Job(this Condition condition, JobBase job)
+    public static Conditioned<JobBase> Job(this IfCondition condition, JobBase job)
         => Conditioned.Link(condition, job);
 
     /// <summary>
     /// Creates a new job.
     /// </summary>
-    public static Conditioned<JobBase> Job(this Condition condition, Conditioned<JobBase> job)
+    public static Conditioned<JobBase> Job(this IfCondition condition, Conditioned<JobBase> job)
         => Conditioned.Link(condition, job);
 
     /// <summary>
     /// Creates a new deployment job.
     /// </summary>
-    public static Conditioned<JobBase> DeploymentJob(this Condition condition, JobBase job)
+    public static Conditioned<JobBase> DeploymentJob(this IfCondition condition, JobBase job)
         => Conditioned.Link(condition, job);
 
     /// <summary>
     /// Creates a new deployment job.
     /// </summary>
-    public static Conditioned<JobBase> DeploymentJob(this Condition condition, Conditioned<JobBase> job)
+    public static Conditioned<JobBase> DeploymentJob(this IfCondition condition, Conditioned<JobBase> job)
         => Conditioned.Link(condition, job);
 
     /// <summary>
     /// Creates a new step.
     /// </summary>
-    public static Conditioned<Step> Step(this Condition condition, Step step)
+    public static Conditioned<Step> Step(this IfCondition condition, Step step)
         => Conditioned.Link(condition, step);
 
     /// <summary>
     /// Creates a new step.
     /// </summary>
-    public static Conditioned<Step> Step(this Condition condition, Conditioned<Step> step)
+    public static Conditioned<Step> Step(this IfCondition condition, Conditioned<Step> step)
         => Conditioned.Link(condition, step);
 
     /// <summary>
     /// Creates a new pool.
     /// </summary>
-    public static Conditioned<Pool> Pool(this Condition condition, Pool pool)
+    public static Conditioned<Pool> Pool(this IfCondition condition, Pool pool)
         => Conditioned.Link(condition, pool);
 
     /// <summary>
     /// Creates a new pool.
     /// </summary>
-    public static Conditioned<Pool> Pool(this Condition condition, Conditioned<Pool> pool)
+    public static Conditioned<Pool> Pool(this IfCondition condition, Conditioned<Pool> pool)
         => Conditioned.Link(condition, pool);
 
     /// <summary>
@@ -132,7 +131,7 @@ public static class ConditionExtensions
     /// <param name="condition">Conditioned definition</param>
     /// <param name="path">Relative path to the YAML file with the template</param>
     /// <param name="parameters">Values for template parameters</param>
-    public static Conditioned<Stage> StageTemplate(this Condition condition, string path, TemplateParameters? parameters = null)
+    public static Conditioned<Stage> StageTemplate(this IfCondition condition, string path, TemplateParameters? parameters = null)
         => Conditioned.Link(condition, new Template<Stage>(condition: condition, path: path, parameters ?? new TemplateParameters()));
 
     /// <summary>
@@ -141,7 +140,7 @@ public static class ConditionExtensions
     /// <param name="condition">Conditioned definition</param>
     /// <param name="path">Relative path to the YAML file with the template</param>
     /// <param name="parameters">Values for template parameters</param>
-    public static Conditioned<JobBase> JobTemplate(this Condition condition, string path, TemplateParameters? parameters = null)
+    public static Conditioned<JobBase> JobTemplate(this IfCondition condition, string path, TemplateParameters? parameters = null)
         => Conditioned.Link(condition, new Template<JobBase>(condition: condition, path: path, parameters ?? new TemplateParameters()));
 
     /// <summary>
@@ -150,7 +149,7 @@ public static class ConditionExtensions
     /// <param name="condition">Conditioned definition</param>
     /// <param name="path">Relative path to the YAML file with the template</param>
     /// <param name="parameters">Values for template parameters</param>
-    public static Conditioned<Step> StepTemplate(this Condition condition, string path, TemplateParameters? parameters = null)
+    public static Conditioned<Step> StepTemplate(this IfCondition condition, string path, TemplateParameters? parameters = null)
         => Conditioned.Link(condition, new Template<Step>(condition: condition, path: path, parameters ?? new TemplateParameters()));
 
     /// <summary>
@@ -159,162 +158,156 @@ public static class ConditionExtensions
     /// <param name="condition">Conditioned definition</param>
     /// <param name="path">Relative path to the YAML file with the template</param>
     /// <param name="parameters">Values for template parameters</param>
-    public static Conditioned<VariableBase> VariableTemplate(this Condition condition, string path, TemplateParameters? parameters = null)
+    public static Conditioned<VariableBase> VariableTemplate(this IfCondition condition, string path, TemplateParameters? parameters = null)
         => Conditioned.Link(condition, new Template<VariableBase>(condition: condition, path: path, parameters ?? new TemplateParameters()));
 
     /// <summary>
     /// Reference a stage library (series of library stages).
     /// </summary>
-    public static Conditioned<Stage> StageLibrary(this Condition condition, StageLibrary library)
+    public static Conditioned<Stage> StageLibrary(this IfCondition condition, StageLibrary library)
         => Conditioned.Link(condition, library.Items);
 
     /// <summary>
     /// Reference a job library (series of library jobs).
     /// </summary>
-    public static Conditioned<JobBase> JobLibrary(this Condition condition, JobLibrary library)
+    public static Conditioned<JobBase> JobLibrary(this IfCondition condition, JobLibrary library)
         => Conditioned.Link(condition, library.Items);
 
     /// <summary>
     /// Reference a step library (series of library steps).
     /// </summary>
-    public static Conditioned<Step> StepLibrary(this Condition condition, StepLibrary library)
+    public static Conditioned<Step> StepLibrary(this IfCondition condition, StepLibrary library)
         => Conditioned.Link(condition, library.Items);
 
     /// <summary>
     /// Reference a variable library (series of library Variables).
     /// </summary>
-    public static Conditioned<VariableBase> VariableLibrary(this Condition condition, VariableLibrary library)
+    public static Conditioned<VariableBase> VariableLibrary(this IfCondition condition, VariableLibrary library)
         => Conditioned.Link(condition, library.Items);
 
     /// <summary>
     /// Reference a step library (series of library stages).
     /// </summary>
-    public static Conditioned<Stage> StageLibrary<T>(this Condition condition) where T : StageLibrary, new()
+    public static Conditioned<Stage> StageLibrary<T>(this IfCondition condition) where T : StageLibrary, new()
         => Conditioned.Link(condition, AzureDevOpsDefinition.CreateInstance<T>().Items);
 
     /// <summary>
     /// Reference a step library (series of library jobs).
     /// </summary>
-    public static Conditioned<JobBase> JobLibrary<T>(this Condition condition) where T : JobLibrary, new()
+    public static Conditioned<JobBase> JobLibrary<T>(this IfCondition condition) where T : JobLibrary, new()
         => Conditioned.Link(condition, AzureDevOpsDefinition.CreateInstance<T>().Items);
 
     /// <summary>
     /// Reference a step library (series of library steps).
     /// </summary>
-    public static Conditioned<Step> StepLibrary<T>(this Condition condition) where T : StepLibrary, new()
+    public static Conditioned<Step> StepLibrary<T>(this IfCondition condition) where T : StepLibrary, new()
         => Conditioned.Link(condition, AzureDevOpsDefinition.CreateInstance<T>().Items);
 
     /// <summary>
     /// Reference a step library (series of library Variables).
     /// </summary>
-    public static Conditioned<VariableBase> VariableLibrary<T>(this Condition condition) where T : VariableLibrary, new()
+    public static Conditioned<VariableBase> VariableLibrary<T>(this IfCondition condition) where T : VariableLibrary, new()
         => Conditioned.Link(condition, AzureDevOpsDefinition.CreateInstance<T>().Items);
 
     /// <summary>
     /// Include a set of stages.
     /// </summary>
-    public static Conditioned<Stage> Stages(this Condition condition, params Conditioned<Stage>[] stages)
+    public static Conditioned<Stage> Stages(this IfCondition condition, params Conditioned<Stage>[] stages)
         => Conditioned.Link<Stage>(condition, stages);
 
     /// <summary>
     /// Include a set of jobs.
     /// </summary>
-    public static Conditioned<Job> Jobs(this Condition condition, params Conditioned<Job>[] jobs)
+    public static Conditioned<Job> Jobs(this IfCondition condition, params Conditioned<Job>[] jobs)
         => Conditioned.Link<Job>(condition, jobs);
 
     /// <summary>
     /// Include a set of steps.
     /// </summary>
-    public static Conditioned<Step> Steps(this Condition condition, params Conditioned<Step>[] steps)
+    public static Conditioned<Step> Steps(this IfCondition condition, params Conditioned<Step>[] steps)
         => Conditioned.Link<Step>(condition, steps);
 
     /// <summary>
     /// Include a set of variables.
     /// </summary>
-    public static Conditioned<VariableBase> Variables(this Condition condition, params Conditioned<VariableBase>[] variables)
+    public static Conditioned<VariableBase> Variables(this IfCondition condition, params Conditioned<VariableBase>[] variables)
         => Conditioned.Link<VariableBase>(condition, variables);
 
     /// <summary>
     /// Include a set of stages.
     /// </summary>
-    public static Conditioned<Stage> Stages(this Condition condition, IEnumerable<Conditioned<Stage>> stages)
+    public static Conditioned<Stage> Stages(this IfCondition condition, IEnumerable<Conditioned<Stage>> stages)
         => Conditioned.Link(condition, stages);
 
     /// <summary>
     /// Include a set of jobs.
     /// </summary>
-    public static Conditioned<Job> Jobs(this Condition condition, IEnumerable<Conditioned<Job>> jobs)
+    public static Conditioned<Job> Jobs(this IfCondition condition, IEnumerable<Conditioned<Job>> jobs)
         => Conditioned.Link(condition, jobs);
 
     /// <summary>
     /// Include a set of steps.
     /// </summary>
-    public static Conditioned<Step> Steps(this Condition condition, IEnumerable<Conditioned<Step>> steps)
+    public static Conditioned<Step> Steps(this IfCondition condition, IEnumerable<Conditioned<Step>> steps)
         => Conditioned.Link(condition, steps);
 
     /// <summary>
     /// Include a set of variables.
     /// </summary>
-    public static Conditioned<VariableBase> Variables(this Condition condition, IEnumerable<Conditioned<VariableBase>> variables)
+    public static Conditioned<VariableBase> Variables(this IfCondition condition, IEnumerable<Conditioned<VariableBase>> variables)
         => Conditioned.Link(condition, variables);
 
     /// <summary>
     /// Include a set of stages.
     /// </summary>
-    public static Conditioned<Stage> Stages(this Condition condition, params Stage[] stages)
+    public static Conditioned<Stage> Stages(this IfCondition condition, params Stage[] stages)
         => Conditioned.Link<Stage>(condition, stages.Select(x => new Conditioned<Stage>(x)));
 
     /// <summary>
     /// Include a set of jobs.
     /// </summary>
-    public static Conditioned<Job> Jobs(this Condition condition, params Job[] jobs)
+    public static Conditioned<Job> Jobs(this IfCondition condition, params Job[] jobs)
         => Conditioned.Link<Job>(condition, jobs.Select(x => new Conditioned<Job>(x)));
 
     /// <summary>
     /// Include a set of steps.
     /// </summary>
-    public static Conditioned<Step> Steps(this Condition condition, params Step[] steps)
+    public static Conditioned<Step> Steps(this IfCondition condition, params Step[] steps)
         => Conditioned.Link<Step>(condition, steps.Select(x => new Conditioned<Step>(x)));
 
     /// <summary>
     /// Include a set of variables.
     /// </summary>
-    public static Conditioned<VariableBase> Variables(this Condition condition, params VariableBase[] variables)
+    public static Conditioned<VariableBase> Variables(this IfCondition condition, params VariableBase[] variables)
         => Conditioned.Link<VariableBase>(condition, variables.Select(x => new Conditioned<VariableBase>(x)));
 
     /// <summary>
     /// Include a set of stages.
     /// </summary>
-    public static Conditioned<Stage> Stages(this Condition condition, IEnumerable<Stage> stages)
+    public static Conditioned<Stage> Stages(this IfCondition condition, IEnumerable<Stage> stages)
         => condition.Stages(stages.ToArray());
 
     /// <summary>
     /// Include a set of jobs.
     /// </summary>
-    public static Conditioned<Job> Jobs(this Condition condition, IEnumerable<Job> jobs)
+    public static Conditioned<Job> Jobs(this IfCondition condition, IEnumerable<Job> jobs)
         => condition.Jobs(jobs.ToArray());
 
     /// <summary>
     /// Include a set of steps.
     /// </summary>
-    public static Conditioned<Step> Steps(this Condition condition, IEnumerable<Step> steps)
+    public static Conditioned<Step> Steps(this IfCondition condition, IEnumerable<Step> steps)
         => condition.Steps(steps.ToArray());
 
     /// <summary>
     /// Include a set of variables.
     /// </summary>
-    public static Conditioned<VariableBase> Variables(this Condition condition, IEnumerable<VariableBase> variables)
+    public static Conditioned<VariableBase> Variables(this IfCondition condition, IEnumerable<VariableBase> variables)
         => condition.Variables(variables.ToArray());
 
-    public static Conditioned<Strategy> Strategy(this Condition condition, Strategy strategy)
+    public static Conditioned<Strategy> Strategy(this IfCondition condition, Strategy strategy)
         => Conditioned.Link(condition, strategy);
 
-    public static Conditioned<T> Value<T>(this Condition condition, T value)
+    public static Conditioned<T> Value<T>(this IfCondition condition, T value)
         => Conditioned.Link(condition, value);
-
-    public static IRuntimeExpression AsRuntimeExpression(this string condition)
-        => new StringRuntimeExpression(condition);
-
-    internal static IRuntimeExpression[] AsRuntimeExpressions(this IEnumerable<object> array)
-        => array.Select(x => x as IRuntimeExpression ?? x.ToString()!.AsRuntimeExpression()).ToArray();
 }

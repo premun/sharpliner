@@ -63,6 +63,93 @@ public record RepositoryResource
     {
         Identifier = identifier ?? throw new ArgumentNullException(nameof(identifier));
     }
+
+    /// <summary>
+    /// Defines a GitHub repository resource.
+    /// </summary>
+    /// <param name="identifier">Name of the resource to be referenced later (in the checkout step)</param>
+    /// <param name="orgOrUser">Name of the organization / owner of the repository</param>
+    /// <param name="repoName">Name of the repository</param>
+    /// <param name="endpoint">Endpoint to use to checkout this repository</param>
+    /// <param name="refName">Ref to checkout</param>
+    public static RepositoryResource GitHub(
+        string identifier,
+        string orgOrUser,
+        string repoName,
+        string endpoint,
+        string? refName = null)
+        => CreateResource(RepositoryType.GitHub, identifier, orgOrUser, repoName, endpoint, refName);
+
+    /// <summary>
+    /// Defines a GitHub Enterprise repository resource.
+    /// </summary>
+    /// <param name="identifier">Name of the resource to be referenced later (in the checkout step)</param>
+    /// <param name="orgOrUser">Name of the organization / owner of the repository</param>
+    /// <param name="repoName">Name of the repository</param>
+    /// <param name="endpoint">Endpoint to use to checkout this repository</param>
+    /// <param name="refName">Ref to checkout</param>
+    public static RepositoryResource GitHubEnterprise(
+        string identifier,
+        string orgOrUser,
+        string repoName,
+        string endpoint,
+        string? refName = null)
+        => CreateResource(RepositoryType.GitHubEnterprise, identifier, orgOrUser, repoName, endpoint, refName);
+
+    /// <summary>
+    /// Defines a Azure DevOps repository resource.
+    /// </summary>
+    /// <param name="identifier">Name of the resource to be referenced later (in the checkout step)</param>
+    /// <param name="project">Name of the Azure DevOps project</param>
+    /// <param name="repoName">Name of the repository</param>
+    /// <param name="endpoint">Endpoint to use to checkout this repository</param>
+    /// <param name="refName">Ref to checkout</param>
+    public static RepositoryResource AzureDevOps(
+        string identifier,
+        string project,
+        string repoName,
+        string? endpoint = null,
+        string? refName = null)
+        => CreateResource(RepositoryType.Git, identifier, project, repoName, endpoint, refName);
+
+    /// <summary>
+    /// Defines a BitBucket repository resource.
+    /// </summary>
+    /// <param name="identifier">Name of the resource to be referenced later (in the checkout step)</param>
+    /// <param name="orgOrUser">Name of the organization / owner of the repository</param>
+    /// <param name="repoName">Name of the repository</param>
+    /// <param name="endpoint">Endpoint to use to checkout this repository</param>
+    /// <param name="refName">Ref to checkout</param>
+    public static RepositoryResource BitBucket(
+        string identifier,
+        string orgOrUser,
+        string repoName,
+        string endpoint,
+        string? refName = null)
+        => CreateResource(RepositoryType.Git, identifier, orgOrUser, repoName, endpoint, refName);
+
+    private static RepositoryResource CreateResource(
+        RepositoryType type,
+        string identifier,
+        string orgOrUser,
+        string repoName,
+        string? endpoint,
+        string? refName)
+        => CreateResource(type, identifier, $"{orgOrUser}/{repoName}", endpoint, refName);
+
+    private static RepositoryResource CreateResource(
+        RepositoryType type,
+        string identifier,
+        string name,
+        string? endpoint,
+        string? refName)
+        => new(identifier)
+        {
+            Type = type,
+            Name = name,
+            Endpoint = endpoint!,
+            Ref = refName!,
+        };
 }
 
 public enum RepositoryType

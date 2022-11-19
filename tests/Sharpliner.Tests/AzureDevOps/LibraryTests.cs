@@ -22,7 +22,7 @@ public class LibraryTests
 
             new Job("End")
             {
-                Steps =
+                Steps = new[]
                 {
                     Script.Inline("echo 'Goodbye World'")
                 }

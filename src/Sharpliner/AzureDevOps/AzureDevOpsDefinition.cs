@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Sharpliner.AzureDevOps.ConditionedExpressions;
-using Sharpliner.AzureDevOps.ConditionedExpressions.Interfaces;
+using Sharpliner.AzureDevOps.ConditionedExpressions.Arguments;
 using Sharpliner.AzureDevOps.Tasks;
 using static Sharpliner.AzureDevOps.TemplateDefinition;
 
@@ -453,158 +453,84 @@ public abstract class AzureDevOpsDefinition
     /// <summary>
     /// Start an ${{ if () }} section.
     /// </summary>
-    protected static ConditionBuilder If => new();
+    protected static IfConditionBuilder If => new();
 
     /// <summary>
     /// Use this to specify any custom condition (in case you miss some operator or expression).
     /// </summary>
-    protected static Condition Condition(string condition) => new CustomCondition(condition);
+    protected static InlineCondition Condition(string condition) => new InlineCustomCondition(condition);
 
-    protected static Condition<T> And<T>(params string[] expressions) => new AndCondition<T>(expressions);
+    protected static InlineCondition<T> And<T>(params string[] expressions) => new InlineAndCondition<T>(expressions);
 
-    protected static Condition Or<T>(params string[] expressions) => new OrCondition<T>(expressions);
+    protected static InlineCondition Or<T>(params string[] expressions) => new InlineOrCondition<T>(expressions);
 
-    protected static Condition Xor<T>(string expression1, string expression2) => new XorCondition<T>(expression1, expression2);
+    protected static InlineCondition Xor<T>(string expression1, string expression2) => new InlineXorCondition<T>(expression1, expression2);
 
-    protected static Condition<T> And<T>(params Condition[] expressions) => new AndCondition<T>(expressions);
+    protected static InlineCondition And<T>(params InlineCondition[] expressions) => new InlineAndCondition<T>(expressions);
 
-    protected static Condition Or<T>(params Condition[] expressions) => new OrCondition<T>(expressions);
+    protected static InlineCondition Or<T>(params InlineCondition[] expressions) => new InlineOrCondition<T>(expressions);
 
-    protected static Condition Xor<T>(Condition expression1, Condition expression2) => new XorCondition<T>(expression1, expression2);
+    protected static InlineCondition Xor<T>(Condition expression1, Condition expression2) => new InlineXorCondition<T>(expression1, expression2);
 
-    protected static Condition<T> Equal<T>(StringRuntimeExpression expression1, StringRuntimeExpression expression2) => new EqualityCondition<T>(true, expression1, expression2);
-    protected static Condition<T> Equal<T>(IRuntimeExpression expression1, StringRuntimeExpression expression2) => new EqualityCondition<T>(true, expression1, expression2);
-    protected static Condition<T> Equal<T>(StringRuntimeExpression expression1, IRuntimeExpression expression2) => new EqualityCondition<T>(true, expression1, expression2);
-    protected static Condition<T> Equal<T>(IRuntimeExpression expression1, IRuntimeExpression expression2) => new EqualityCondition<T>(true, expression1, expression2);
+    protected static InlineCondition Equal<T>(InlineExpression expression1, InlineExpression expression2) => new InlineEqualityCondition<T>(true, expression1, expression2);
 
-    protected static Condition<T> NotEqual<T>(StringRuntimeExpression expression1, StringRuntimeExpression expression2) => new EqualityCondition<T>(false, expression1, expression2);
-    protected static Condition<T> NotEqual<T>(IRuntimeExpression expression1, StringRuntimeExpression expression2) => new EqualityCondition<T>(false, expression1, expression2);
-    protected static Condition<T> NotEqual<T>(StringRuntimeExpression expression1, IRuntimeExpression expression2) => new EqualityCondition<T>(false, expression1, expression2);
-    protected static Condition<T> NotEqual<T>(IRuntimeExpression expression1, IRuntimeExpression expression2) => new EqualityCondition<T>(false, expression1, expression2);
+    protected static InlineCondition NotEqual<T>(InlineExpression expression1, InlineExpression expression2) => new InlineEqualityCondition<T>(false, expression1, expression2);
 
-    protected static Condition Contains<T>(StringRuntimeExpression needle, StringRuntimeExpression haystack) => new ContainsCondition<T>(needle, haystack);
-    protected static Condition Contains<T>(IRuntimeExpression needle, StringRuntimeExpression haystack) => new ContainsCondition<T>(needle, haystack);
-    protected static Condition Contains<T>(StringRuntimeExpression needle, IRuntimeExpression haystack) => new ContainsCondition<T>(needle, haystack);
-    protected static Condition Contains<T>(IRuntimeExpression needle, IRuntimeExpression haystack) => new ContainsCondition<T>(needle, haystack);
+    protected static InlineCondition Contains<T>(InlineExpression needle, InlineExpression haystack) => new InlineContainsCondition<T>(needle, haystack);
 
-    protected static Condition StartsWith<T>(StringRuntimeExpression needle, StringRuntimeExpression haystack) => new StartsWithCondition<T>(needle, haystack);
-    protected static Condition StartsWith<T>(IRuntimeExpression needle, StringRuntimeExpression haystack) => new StartsWithCondition<T>(needle, haystack);
-    protected static Condition StartsWith<T>(StringRuntimeExpression needle, IRuntimeExpression haystack) => new StartsWithCondition<T>(needle, haystack);
-    protected static Condition StartsWith<T>(IRuntimeExpression needle, IRuntimeExpression haystack) => new StartsWithCondition<T>(needle, haystack);
+    protected static InlineCondition StartsWith<T>(InlineExpression needle, InlineExpression haystack) => new InlineStartsWithCondition<T>(needle, haystack);
 
-    protected static Condition EndsWith<T>(StringRuntimeExpression needle, StringRuntimeExpression haystack) => new EndsWithCondition<T>(needle, haystack);
-    protected static Condition EndsWith<T>(IRuntimeExpression needle, StringRuntimeExpression haystack) => new EndsWithCondition<T>(needle, haystack);
-    protected static Condition EndsWith<T>(StringRuntimeExpression needle, IRuntimeExpression haystack) => new EndsWithCondition<T>(needle, haystack);
-    protected static Condition EndsWith<T>(IRuntimeExpression needle, IRuntimeExpression haystack) => new EndsWithCondition<T>(needle, haystack);
+    protected static InlineCondition EndsWith<T>(InlineExpression needle, InlineExpression haystack) => new InlineEndsWithCondition<T>(needle, haystack);
 
-    protected static Condition ContainsValue<T>(StringRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new ContainsValueCondition<T>(needle, haystack);
-    protected static Condition ContainsValue<T>(StringRuntimeExpression needle, params IRuntimeExpression[] haystack) => new ContainsValueCondition<T>(needle, haystack);
-    protected static Condition ContainsValue<T>(IRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new ContainsValueCondition<T>(needle, haystack);
-    protected static Condition ContainsValue<T>(IRuntimeExpression needle, params IRuntimeExpression[] haystack) => new ContainsValueCondition<T>(needle, haystack);
-    protected static Condition ContainsValue<T>(StringRuntimeExpression needle, params object[] haystack) => new ContainsValueCondition<T>(needle, haystack.AsRuntimeExpressions());
-    protected static Condition ContainsValue<T>(IRuntimeExpression needle, params object[] haystack) => new ContainsValueCondition<T>(needle, haystack.AsRuntimeExpressions());
+    protected static InlineCondition ContainsValue<T>(InlineExpression needle, params InlineExpression[] haystack) => new InlineContainsValueCondition<T>(needle, haystack);
 
-    protected static Condition In<T>(StringRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new InCondition<T>(needle, haystack);
-    protected static Condition In<T>(StringRuntimeExpression needle, params IRuntimeExpression[] haystack) => new InCondition<T>(needle, haystack);
-    protected static Condition In<T>(IRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new InCondition<T>(needle, haystack);
-    protected static Condition In<T>(IRuntimeExpression needle, params IRuntimeExpression[] haystack) => new InCondition<T>(needle, haystack);
-    protected static Condition In<T>(StringRuntimeExpression needle, params object[] haystack) => new InCondition<T>(needle, haystack.AsRuntimeExpressions());
-    protected static Condition In<T>(IRuntimeExpression needle, params object[] haystack) => new InCondition<T>(needle, haystack.AsRuntimeExpressions());
+    protected static InlineCondition In<T>(InlineExpression needle, params InlineExpression[] haystack) => new InlineInCondition<T>(needle, haystack);
 
-    protected static Condition NotIn<T>(StringRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new NotInCondition<T>(needle, haystack);
-    protected static Condition NotIn<T>(StringRuntimeExpression needle, params IRuntimeExpression[] haystack) => new NotInCondition<T>(needle, haystack);
-    protected static Condition NotIn<T>(IRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new NotInCondition<T>(needle, haystack);
-    protected static Condition NotIn<T>(IRuntimeExpression needle, params IRuntimeExpression[] haystack) => new NotInCondition<T>(needle, haystack);
-    protected static Condition NotIn<T>(StringRuntimeExpression needle, params object[] haystack) => new NotInCondition<T>(needle, haystack.AsRuntimeExpressions());
-    protected static Condition NotIn<T>(IRuntimeExpression needle, params object[] haystack) => new NotInCondition<T>(needle, haystack.AsRuntimeExpressions());
+    protected static InlineCondition NotIn<T>(InlineExpression needle, params InlineExpression[] haystack) => new InlineNotInCondition<T>(needle, haystack);
 
-    protected static Condition Greater<T>(StringRuntimeExpression expression1, StringRuntimeExpression expression2) => new GreaterCondition<T>(expression1, expression2);
-    protected static Condition Greater<T>(StringRuntimeExpression expression1, IRuntimeExpression expression2) => new GreaterCondition<T>(expression1, expression2);
-    protected static Condition Greater<T>(IRuntimeExpression expression1, StringRuntimeExpression expression2) => new GreaterCondition<T>(expression1, expression2);
-    protected static Condition Greater<T>(IRuntimeExpression expression1, IRuntimeExpression expression2) => new GreaterCondition<T>(expression1, expression2);
+    protected static InlineCondition Greater<T>(InlineExpression expression1, InlineExpression expression2) => new InlineGreaterCondition<T>(expression1, expression2);
 
-    protected static Condition Less<T>(StringRuntimeExpression expression1, StringRuntimeExpression expression2) => new LessCondition<T>(expression1, expression2);
-    protected static Condition Less<T>(StringRuntimeExpression expression1, IRuntimeExpression expression2) => new LessCondition<T>(expression1, expression2);
-    protected static Condition Less<T>(IRuntimeExpression expression1, StringRuntimeExpression expression2) => new LessCondition<T>(expression1, expression2);
-    protected static Condition Less<T>(IRuntimeExpression expression1, IRuntimeExpression expression2) => new LessCondition<T>(expression1, expression2);
+    protected static InlineCondition Less<T>(InlineExpression expression1, InlineExpression expression2) => new InlineLessCondition<T>(expression1, expression2);
 
-    protected static Condition And(params string[] expressions) => new AndCondition(expressions);
+    protected static InlineCondition And(params string[] expressions) => new InlineAndCondition(expressions);
 
-    protected static Condition Or(params string[] expressions) => new OrCondition(expressions);
+    protected static InlineCondition Or(params string[] expressions) => new InlineOrCondition(expressions);
 
-    protected static Condition Xor(string condition1, string condition2) => new XorCondition(condition1, condition2);
+    protected static InlineCondition Xor(string condition1, string condition2) => new InlineXorCondition(condition1, condition2);
 
-    protected static Condition And(params Condition[] expressions) => new AndCondition(expressions);
+    protected static InlineCondition And(params InlineCondition[] expressions) => new InlineAndCondition(expressions);
 
-    protected static Condition Or(params Condition[] expressions) => new OrCondition(expressions);
+    protected static InlineCondition Or(params InlineCondition[] expressions) => new InlineOrCondition(expressions);
 
-    protected static Condition Xor(Condition expression1, Condition expression2) => new XorCondition(expression1, expression2);
+    protected static InlineCondition Xor(InlineCondition expression1, InlineCondition expression2) => new InlineXorCondition(expression1, expression2);
 
-    protected static Condition Contains(StringRuntimeExpression needle, StringRuntimeExpression haystack) => new ContainsCondition(needle, haystack);
-    protected static Condition Contains(IRuntimeExpression needle, StringRuntimeExpression haystack) => new ContainsCondition(needle, haystack);
-    protected static Condition Contains(StringRuntimeExpression needle, IRuntimeExpression haystack) => new ContainsCondition(needle, haystack);
-    protected static Condition Contains(IRuntimeExpression needle, IRuntimeExpression haystack) => new ContainsCondition(needle, haystack);
+    protected static InlineCondition Contains(InlineExpression needle, InlineExpression haystack) => new InlineContainsCondition(needle, haystack);
 
-    protected static Condition StartsWith(StringRuntimeExpression needle, StringRuntimeExpression haystack) => new StartsWithCondition(needle, haystack);
-    protected static Condition StartsWith(IRuntimeExpression needle, StringRuntimeExpression haystack) => new StartsWithCondition(needle, haystack);
-    protected static Condition StartsWith(StringRuntimeExpression needle, IRuntimeExpression haystack) => new StartsWithCondition(needle, haystack);
-    protected static Condition StartsWith(IRuntimeExpression needle, IRuntimeExpression haystack) => new StartsWithCondition(needle, haystack);
+    protected static InlineCondition StartsWith(InlineExpression needle, InlineExpression haystack) => new InlineStartsWithCondition(needle, haystack);
 
-    protected static Condition EndsWith(StringRuntimeExpression needle, StringRuntimeExpression haystack) => new EndsWithCondition(needle, haystack);
-    protected static Condition EndsWith(IRuntimeExpression needle, StringRuntimeExpression haystack) => new EndsWithCondition(needle, haystack);
-    protected static Condition EndsWith(StringRuntimeExpression needle, IRuntimeExpression haystack) => new EndsWithCondition(needle, haystack);
-    protected static Condition EndsWith(IRuntimeExpression needle, IRuntimeExpression haystack) => new EndsWithCondition(needle, haystack);
+    protected static InlineCondition EndsWith(InlineExpression needle, InlineExpression haystack) => new InlineEndsWithCondition(needle, haystack);
 
-    protected static Condition In(StringRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new InCondition(needle, haystack);
-    protected static Condition In(StringRuntimeExpression needle, params IRuntimeExpression[] haystack) => new InCondition(needle, haystack);
-    protected static Condition In(IRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new InCondition(needle, haystack);
-    protected static Condition In(IRuntimeExpression needle, params IRuntimeExpression[] haystack) => new InCondition(needle, haystack);
-    protected static Condition In(StringRuntimeExpression needle, params object[] haystack) => new InCondition(needle, haystack.AsRuntimeExpressions());
-    protected static Condition In(IRuntimeExpression needle, params object[] haystack) => new InCondition(needle, haystack.AsRuntimeExpressions());
+    protected static InlineCondition In(InlineExpression needle, params InlineExpression[] haystack) => new InlineInCondition(needle, haystack);
 
-    protected static Condition NotIn(StringRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new NotInCondition(needle, haystack);
-    protected static Condition NotIn(StringRuntimeExpression needle, params IRuntimeExpression[] haystack) => new NotInCondition(needle, haystack);
-    protected static Condition NotIn(IRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new NotInCondition(needle, haystack);
-    protected static Condition NotIn(IRuntimeExpression needle, params IRuntimeExpression[] haystack) => new NotInCondition(needle, haystack);
-    protected static Condition NotIn(StringRuntimeExpression needle, params object[] haystack) => new NotInCondition(needle, haystack.AsRuntimeExpressions());
-    protected static Condition NotIn(IRuntimeExpression needle, params object[] haystack) => new NotInCondition(needle, haystack.AsRuntimeExpressions());
+    protected static InlineCondition NotIn(InlineExpression needle, params InlineExpression[] haystack) => new InlineNotInCondition(needle, haystack);
 
-    protected static Condition ContainsValue(StringRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new ContainsValueCondition(needle, haystack);
-    protected static Condition ContainsValue(StringRuntimeExpression needle, params IRuntimeExpression[] haystack) => new ContainsValueCondition(needle, haystack);
-    protected static Condition ContainsValue(IRuntimeExpression needle, params StringRuntimeExpression[] haystack) => new ContainsValueCondition(needle, haystack);
-    protected static Condition ContainsValue(IRuntimeExpression needle, params IRuntimeExpression[] haystack) => new ContainsValueCondition(needle, haystack);
-    protected static Condition ContainsValue(StringRuntimeExpression needle, params object[] haystack) => new ContainsValueCondition(needle, haystack.AsRuntimeExpressions());
-    protected static Condition ContainsValue(IRuntimeExpression needle, params object[] haystack) => new ContainsValueCondition(needle, haystack.AsRuntimeExpressions());
+    protected static InlineCondition ContainsValue(InlineExpression needle, params InlineExpression[] haystack) => new InlineContainsValueCondition(needle, haystack);
 
-    protected static Condition Equal(StringRuntimeExpression expression1, StringRuntimeExpression expression2) => new EqualityCondition(true, expression1, expression2);
-    protected static Condition Equal(IRuntimeExpression expression1, StringRuntimeExpression expression2) => new EqualityCondition(true, expression1, expression2);
-    protected static Condition Equal(StringRuntimeExpression expression1, IRuntimeExpression expression2) => new EqualityCondition(true, expression1, expression2);
-    protected static Condition Equal(IRuntimeExpression expression1, IRuntimeExpression expression2) => new EqualityCondition(true, expression1, expression2);
+    protected static InlineCondition Equal(InlineExpression expression1, InlineExpression expression2) => new InlineEqualityCondition(true, expression1, expression2);
 
-    protected static Condition NotEqual(StringRuntimeExpression expression1, StringRuntimeExpression expression2) => new EqualityCondition(false, expression1, expression2);
-    protected static Condition NotEqual(IRuntimeExpression expression1, StringRuntimeExpression expression2) => new EqualityCondition(false, expression1, expression2);
-    protected static Condition NotEqual(StringRuntimeExpression expression1, IRuntimeExpression expression2) => new EqualityCondition(false, expression1, expression2);
-    protected static Condition NotEqual(IRuntimeExpression expression1, IRuntimeExpression expression2) => new EqualityCondition(false, expression1, expression2);
+    protected static InlineCondition NotEqual(InlineExpression expression1, InlineExpression expression2) => new InlineEqualityCondition(false, expression1, expression2);
 
-    protected static Condition Greater(StringRuntimeExpression expression1, StringRuntimeExpression expression2) => new GreaterCondition(expression1, expression2);
-    protected static Condition Greater(StringRuntimeExpression expression1, IRuntimeExpression expression2) => new GreaterCondition(expression1, expression2);
-    protected static Condition Greater(IRuntimeExpression expression1, StringRuntimeExpression expression2) => new GreaterCondition(expression1, expression2);
-    protected static Condition Greater(IRuntimeExpression expression1, IRuntimeExpression expression2) => new GreaterCondition(expression1, expression2);
+    protected static InlineCondition Greater(InlineExpression expression1, InlineExpression expression2) => new InlineGreaterCondition(expression1, expression2);
 
-    protected static Condition Less(StringRuntimeExpression expression1, StringRuntimeExpression expression2) => new LessCondition(expression1, expression2);
-    protected static Condition Less(StringRuntimeExpression expression1, IRuntimeExpression expression2) => new LessCondition(expression1, expression2);
-    protected static Condition Less(IRuntimeExpression expression1, StringRuntimeExpression expression2) => new LessCondition(expression1, expression2);
-    protected static Condition Less(IRuntimeExpression expression1, IRuntimeExpression expression2) => new LessCondition(expression1, expression2);
+    protected static InlineCondition Less(InlineExpression expression1, InlineExpression expression2) => new InlineLessCondition(expression1, expression2);
 
-    protected static Condition IsBranch(StringRuntimeExpression branchName) => new BranchCondition(branchName, true);
-    protected static Condition IsBranch(IRuntimeExpression branchName) => new BranchCondition(branchName, true);
+    protected static InlineCondition IsBranch(InlineExpression branchName) => new InlineBranchCondition(branchName, true);
 
-    protected static Condition IsNotBranch(StringRuntimeExpression branchName) => new BranchCondition(branchName, false);
-    protected static Condition IsNotBranch(IRuntimeExpression branchName) => new BranchCondition(branchName, false);
+    protected static InlineCondition IsNotBranch(InlineExpression branchName) => new InlineBranchCondition(branchName, false);
 
-    protected static Condition IsPullRequest => new BuildReasonCondition(new StringRuntimeExpression("PullRequest"), true);
+    protected static InlineCondition IsPullRequest => new InlineBuildReasonCondition("PullRequest", true);
 
-    protected static Condition IsNotPullRequest => new BuildReasonCondition(new StringRuntimeExpression("PullRequest"), false);
+    protected static InlineCondition IsNotPullRequest => new InlineBuildReasonCondition("PullRequest", false);
 
     #endregion
 

@@ -27,7 +27,7 @@ jobs:
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
         # If you wish to specify custom queries, you can do so here or in a config file.
@@ -41,10 +41,10 @@ jobs:
 
     - uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '7.0.100-preview.7.22377.5'
+        dotnet-version: '7.0.100'
 
     - name: Build
       run: dotnet build src/Sharpliner/Sharpliner.csproj
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@v2

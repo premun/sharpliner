@@ -16,8 +16,8 @@ public class PublicApiChangeTest
         var exportedApi = GetResourceFile(typeof(PublicApiChangeTest).Assembly, "PublicApiExport.txt").Trim();
 
         // There can be some unimportant differences in the header
-        api = api.Substring(api.IndexOf("namespace "));
-        exportedApi = exportedApi.Substring(exportedApi.IndexOf("namespace "));
+        api = api.Substring(api.IndexOf("namespace ")).Trim();
+        exportedApi = exportedApi.Substring(exportedApi.IndexOf("namespace ")).Trim();
 
         if (api != exportedApi)
         {

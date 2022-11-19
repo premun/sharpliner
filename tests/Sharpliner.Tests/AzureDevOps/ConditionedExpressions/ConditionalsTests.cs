@@ -14,7 +14,7 @@ public class ConditionalsTests
             Variables =
             {
                 If.And(
-                    NotIn("'bar'", "'foo'", "'xyz'", "'foo'"),
+                    NotIn("bar", "foo", "xyz", "'foo'"),
                     NotEqual(variables.Configuration, "'Debug'"),
                     ContainsValue("10", variables.System.JobId)
                 )
@@ -28,7 +28,7 @@ public class ConditionalsTests
     {
         var pipeline = new And_Condition_Test_Pipeline();
         var variable = pipeline.Pipeline.Variables.First();
-        variable.Condition!.ToString().Should().Be(
+        variable.Condition!.WithoutTags().Should().Be(
             "and(" +
                 "notIn('bar', 'foo', 'xyz', 'foo'), " +
                 "ne(variables['Configuration'], 'Debug'), " +
@@ -58,7 +58,7 @@ public class ConditionalsTests
     {
         var pipeline = new Or_Condition_Test_Pipeline();
         var variable = pipeline.Pipeline.Variables.First();
-        variable.Condition!.ToString().Should().Be(
+        variable.Condition!.WithoutTags().Should().Be(
             "or(" +
                 "and(" +
                     "lt(5, 3), " +
@@ -91,8 +91,8 @@ public class ConditionalsTests
         var variable1 = pipeline.Pipeline.Variables.ElementAt(0);
         var variable2 = pipeline.Pipeline.Variables.ElementAt(1);
 
-        variable1.Condition!.ToString().Should().Be("eq(variables['Build.SourceBranch'], 'refs/heads/main')");
-        variable2.Condition!.ToString().Should().Be("and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['Build.SourceBranch'], 'refs/heads/main'))");
+        variable1.Condition!.WithoutTags().Should().Be("eq(variables['Build.SourceBranch'], 'refs/heads/main')");
+        variable2.Condition!.WithoutTags().Should().Be("and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['Build.SourceBranch'], 'refs/heads/main'))");
     }
 
     private class Else_Test_Pipeline : TestPipeline
@@ -265,11 +265,11 @@ public class ConditionalsTests
     {
         var pipeline = new Custom_Condition_Test_Pipeline();
         var variable = pipeline.Pipeline.Variables.First();
-        variable.Condition!.ToString().Should().Be("containsValue($(System.User), 'azdobot')");
+        variable.Condition!.WithoutTags().Should().Be("containsValue($(System.User), 'azdobot')");
         variable = pipeline.Pipeline.Variables.ElementAt(1);
-        variable.Condition!.ToString().Should().Be("in('foo', 'bar')");
+        variable.Condition!.WithoutTags().Should().Be("in('foo', 'bar')");
         variable = pipeline.Pipeline.Variables.Last();
-        variable.Condition!.ToString().Should().Be("xor(True, $(Variable))");
+        variable.Condition!.WithoutTags().Should().Be("xor(True, $(Variable))");
     }
 
     private class Contains_Condition_Test_Pipeline : TestPipeline
@@ -295,8 +295,8 @@ public class ConditionalsTests
         var variable1 = pipeline.Pipeline.Variables.ElementAt(0);
         var variable2 = pipeline.Pipeline.Variables.ElementAt(1);
 
-        variable1.Condition!.ToString().Should().Be("contains(variables['Build.SourceBranch'], 'refs/heads/feature/')");
-        variable2.Condition!.ToString().Should().Be("contains(variables['Build.SourceBranch'], 'refs/heads/feature/')");
+        variable1.Condition!.WithoutTags().Should().Be("contains(variables['Build.SourceBranch'], 'refs/heads/feature/')");
+        variable2.Condition!.WithoutTags().Should().Be("contains(variables['Build.SourceBranch'], 'refs/heads/feature/')");
     }
 
     private class StartsWith_Condition_Test_Pipeline : TestPipeline
@@ -322,8 +322,8 @@ public class ConditionalsTests
         var variable1 = pipeline.Pipeline.Variables.ElementAt(0);
         var variable2 = pipeline.Pipeline.Variables.ElementAt(1);
 
-        variable1.Condition!.ToString().Should().Be("startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')");
-        variable2.Condition!.ToString().Should().Be("startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')");
+        variable1.Condition!.WithoutTags().Should().Be("startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')");
+        variable2.Condition!.WithoutTags().Should().Be("startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')");
     }
 
     private class EndsWith_Condition_Test_Pipeline : TestPipeline
@@ -349,7 +349,75 @@ public class ConditionalsTests
         var variable1 = pipeline.Pipeline.Variables.ElementAt(0);
         var variable2 = pipeline.Pipeline.Variables.ElementAt(1);
 
-        variable1.Condition!.ToString().Should().Be("endsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')");
-        variable2.Condition!.ToString().Should().Be("endsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')");
+        variable1.Condition!.WithoutTags().Should().Be("endsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')");
+        variable2.Condition!.WithoutTags().Should().Be("endsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')");
     }
+
+    private class IfCondition_And_InlineCondition_Test_Pipeline : TestPipeline
+    {
+        public override Pipeline Pipeline => new()
+        {
+            Parameters = { StringParameter("Param1", defaultValue: "ParamValue1") },
+            Variables =
+            {
+                If.StartsWith("Param", parameters["Param1"])
+                    .Variable("feature", "on"),
+            },
+            Stages =
+            {
+                new Stage("Stage1")
+                {
+                    Jobs =
+                    {
+                        new Job("Job1")
+                        {
+                            Steps =
+                            {
+                                Script.Inline("echo Does this condition work?") with
+                                {
+                                    Condition = StartsWith("Param", parameters["Param1"])
+                                }
+                            },
+                            Condition = StartsWith("Param", parameters["Param1"])
+                        }
+                    },
+                    Condition = StartsWith("Param", parameters["Param1"])
+                }
+            }
+        };
+    }
+
+    [Fact]
+    public void IfCondition_And_InlineCondition_Test()
+    {
+        var pipeline = new IfCondition_And_InlineCondition_Test_Pipeline();
+
+        var yaml = pipeline.Serialize();
+
+        yaml.Trim().Should().Be(
+            """
+            parameters:
+            - name: Param1
+              type: string
+              default: ParamValue1
+
+            variables:
+            - ${{ if startsWith(parameters.Param1, 'Param') }}:
+              - name: feature
+                value: on
+
+            stages:
+            - stage: Stage1
+              jobs:
+              - job: Job1
+                steps:
+                - script: |-
+                    echo Does this condition work?
+                  condition: startsWith('${{ parameters.Param1 }}', 'Param')
+                condition: startsWith('${{ parameters.Param1 }}', 'Param')
+              condition: startsWith('${{ parameters.Param1 }}', 'Param')
+            """
+            );
+    }
+
 }
