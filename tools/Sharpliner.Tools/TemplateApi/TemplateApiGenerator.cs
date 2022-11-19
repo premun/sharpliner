@@ -64,10 +64,10 @@ public class TemplateApiGenerator
 
     private List<string> AddOrUpdateMethod(string templatePath, ParsedTemplate template, List<string> body)
     {
-        var methodName = CreateMethodName(Path.GetFileNameWithoutExtension(templatePath));
+        var methodName = CreateMethodName(templatePath);
         var arguments = GetArguments(template);
         var relativePath = GetRelativePath(templatePath);
-        var methodBody = GetMethodBody(relativePath, methodName, InferType(template), arguments);
+        var methodBody = CreateMethod(relativePath, methodName, InferType(template), arguments);
 
         var methodTag = $"// {relativePath}";
         var startIndex = body.FindIndex(s => s.Contains(methodTag));
@@ -86,7 +86,7 @@ public class TemplateApiGenerator
             .ToList();
     }
 
-    private List<string> GetMethodBody(string relativePath, string methodName, string type, TemplateReferenceArgument[] arguments)
+    private List<string> CreateMethod(string relativePath, string methodName, string type, TemplateReferenceArgument[] arguments)
     {
         var args = arguments.Select(arg => $"{arg.Type} {arg.Name}{(arg.Default is not null ? $" = {arg.Default}" : string.Empty)}").ToList();
 
@@ -164,7 +164,7 @@ public class TemplateApiGenerator
             }
         }
 
-        return templatePath
+        return '/' + templatePath
             .Substring(gitRoot.FullName.Length)
             .TrimStart(Path.DirectorySeparatorChar)
             .Replace('\\', '/');
@@ -199,8 +199,9 @@ public class TemplateApiGenerator
 
     private static string CreateMethodName(string templateName)
     {
-        // TODO
-        return "Foo";
+        var name = Path.GetFileNameWithoutExtension(templateName);
+        name = (name[0] + "").ToUpperInvariant() + name[1..];
+        return name;
     }
 
     private static string GetNewContent(string namespaceName, string className) =>
