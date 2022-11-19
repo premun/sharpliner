@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
+using System.Text;
 using Sharpliner.Tools.TemplateApi.Model;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
@@ -11,7 +11,7 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Sharpliner.Tools.TemplateApi;
 
-public partial class TemplateApiGenerator
+public class TemplateApiGenerator
 {
     private string _newLine = Environment.NewLine;
 
@@ -285,9 +285,26 @@ public partial class TemplateApiGenerator
     private static string CreateMethodName(string templateName)
     {
         var name = Path.GetFileNameWithoutExtension(templateName);
-        name = (name[0] + "").ToUpperInvariant() + name[1..];
-        var rgx = MethodSanitize();
-        return rgx.Replace(name, string.Empty);
+        var nameBuild = new StringBuilder();
+
+        for (int i = 0; i < name.Length; i++)
+        {
+            if (!char.IsLetter(name[i]) && !char.IsDigit(name[i]))
+            {
+                continue;
+            }
+
+            if (i == 0 || (!char.IsLetter(name[i - 1]) && !char.IsDigit(name[i - 1])))
+            {
+                nameBuild.Append(char.ToUpper(name[i]));
+            }
+            else
+            {
+                nameBuild.Append(name[i]);
+            }
+        }
+
+        return nameBuild.ToString();
     }
 
     private static string GetNewContent(string namespaceName, string className) =>
@@ -302,7 +319,4 @@ public partial class TemplateApiGenerator
         {
         }
         """;
-
-    [GeneratedRegex("[^a-zA-Z0-9_]")]
-    private static partial Regex MethodSanitize();
 }
