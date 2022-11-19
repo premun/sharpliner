@@ -2,7 +2,7 @@
   "profiles": {
     "Sharpliner.Tools": {
       "commandName": "Project",
-      "commandLineArgs": "template-api -o \"D:\\github\\personal\\Sharpliner\\tests\\Sharpliner.Tests\\ArcadeTemplates.cs\" \"D:\\github\\arcade\\eng\\common\\templates\\jobs\\source-build.yml\""
+      "commandLineArgs": "template-api -o D:\\github\\personal\\Sharpliner\\tests\\Sharpliner.Tests\\RuntimeTemplates.cs D:\\github\\runtime\\eng\\pipelines\\common\\build-coreclr-and-libraries-job.yml"
     }
   }
 }

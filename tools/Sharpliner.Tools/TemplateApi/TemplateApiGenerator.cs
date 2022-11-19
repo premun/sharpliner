@@ -182,6 +182,7 @@ public class TemplateApiGenerator
         "true" or "false" => ("bool", ((string)value).ToLowerInvariant()),
         string s => ("string", s is not null ? $"\"{s}\"" : null),
         bool b => ("bool", b),
+        IEnumerable<object> => ("List<MISSING_TYPE>", null),
         _ => ("MISSING_TYPE", null),
     };
 
@@ -309,6 +310,7 @@ public class TemplateApiGenerator
 
     private static string GetNewContent(string namespaceName, string className) =>
         $$"""
+        using System.Collections.Generic;
         using Sharpliner.AzureDevOps;
         using Sharpliner.AzureDevOps.ConditionedExpressions;
         using Sharpliner.AzureDevOps.Tasks;
