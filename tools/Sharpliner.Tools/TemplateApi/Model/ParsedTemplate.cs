@@ -13,10 +13,10 @@ namespace Sharpliner.Tools.TemplateApi.Model;
 //
 internal abstract class ParsedTemplate
 {
-    public List<Dictionary<object, object>>? Stages { get; set; }
-    public List<Dictionary<object, object>>? Jobs { get; set; }
-    public List<Dictionary<object, object>>? Steps { get; set; }
-    public List<Dictionary<object, object>>? Variables { get; set; }
+    public List<object>? Stages { get; set; }
+    public List<object>? Jobs { get; set; }
+    public List<object>? Steps { get; set; }
+    public List<object>? Variables { get; set; }
 }
 
 internal class FullySpecifiedTemplate : ParsedTemplate

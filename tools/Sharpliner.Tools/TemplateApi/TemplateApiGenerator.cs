@@ -246,7 +246,7 @@ public class TemplateApiGenerator
 
             if (gitRoot == null)
             {
-                throw new Exception($"Failed to find git repository in {Directory.GetParent(Assembly.GetExecutingAssembly().Location)?.FullName}");
+                throw new Exception($"Failed to find git repository for {Path.GetDirectoryName(templatePath)}");
             }
         }
 
