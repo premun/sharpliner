@@ -115,7 +115,7 @@ public class SharplinerPublisher(TaskLoggingHelper logger)
     {
         logger.LogMessage(MessageImportance.High, $"  Validating definition..");
 
-        foreach (var validation in definition.Validations)
+        foreach (var validation in definition.Validations.Concat(SharplinerConfiguration.Current.RegisteredValidations))
         {
             var errors = validation.Validate();
 

@@ -1,8 +1,9 @@
-﻿using Sharpliner.Common;
+﻿using System.Collections.Generic;
+using Sharpliner.Common;
 
 namespace Sharpliner;
 
-// This interface is needed to hide the Current static member from 
+// This interface is needed to hide the Current static member.
 public interface ISharplinerConfiguration
 {
     /// <summary>
@@ -19,6 +20,11 @@ public interface ISharplinerConfiguration
     /// Hook into the publishing process
     /// </summary>
     SharplinerConfiguration.SerializationHooks Hooks { get; }
+
+    /// <summary>
+    /// Registers a custom validation that is run for all definitions.
+    /// </summary>
+    void RegisterValidation<T>(T validation) where T : IDefinitionValidation;
 }
 
 /// <summary>
@@ -27,6 +33,8 @@ public interface ISharplinerConfiguration
 /// </summary>
 public abstract class SharplinerConfiguration : ISharplinerConfiguration
 {
+    private readonly List<IDefinitionValidation> _additionalValidations = [];
+
     /// <summary>
     /// Settings around YAML serialization
     /// </summary>
@@ -55,20 +63,49 @@ public abstract class SharplinerConfiguration : ISharplinerConfiguration
     /// </summary>
     public class ValidationsSettings
     {
+        private readonly Dictionary<string, ValidationSeverity> _severities = new()
+        {
+            { nameof(NameFields), ValidationSeverity.Error },
+            { nameof(DependsOnFields), ValidationSeverity.Warning },
+            { nameof(RepositoryCheckouts), ValidationSeverity.Warning },
+        };
+
         /// <summary>
         /// Validates whether stage and job names are valid.
         /// </summary>
-        public ValidationSeverity NameFields { get; set; } = ValidationSeverity.Error;
+        public ValidationSeverity NameFields
+        {
+            get => _severities[nameof(NameFields)];
+            set => _severities[nameof(NameFields)] = value;
+        }
 
         /// <summary>
         /// Validates whether stages and jobs do not dependent on each other and similar.
         /// </summary>
-        public ValidationSeverity DependsOnFields { get; set; } = ValidationSeverity.Warning;
+        public ValidationSeverity DependsOnFields
+        {
+            get => _severities[nameof(DependsOnFields)];
+            set => _severities[nameof(DependsOnFields)] = value;
+        }
 
         /// <summary>
         /// Validates whether checked out repositories are defined in resources.
         /// </summary>
-        public ValidationSeverity RepositoryCheckouts { get; set; } = ValidationSeverity.Warning;
+        public ValidationSeverity RepositoryCheckouts
+        {
+            get => _severities[nameof(RepositoryCheckouts)];
+            set => _severities[nameof(RepositoryCheckouts)] = value;
+        }
+
+        /// <summary>
+        /// Sets validation severity for a specific validation.
+        /// </summary>
+        /// <param name="name">Validation name</param>
+        internal ValidationSeverity this[string name]
+        {
+            get => _severities[name];
+            set => _severities[name] = value;
+        }
     }
 
     /// <summary>
@@ -100,7 +137,7 @@ public abstract class SharplinerConfiguration : ISharplinerConfiguration
     /// <summary>
     /// Current configuration we can reach from anywhere
     /// </summary>
-    internal static ISharplinerConfiguration Current { get; private set; } = new DefaultSharplinerConfiguration();
+    internal static SharplinerConfiguration Current { get; private set; } = new DefaultSharplinerConfiguration();
 
     /// <summary>
     /// Use this property to customize how YAML is serialized
@@ -124,6 +161,15 @@ public abstract class SharplinerConfiguration : ISharplinerConfiguration
     }
 
     public abstract void Configure();
+
+    public void RegisterValidation<T>(T validation)
+        where T : IDefinitionValidation
+    {
+        _additionalValidations.Add(validation);
+    }
+
+    internal IReadOnlyList<IDefinitionValidation> RegisteredValidations
+        => _additionalValidations;
 }
 
 internal class DefaultSharplinerConfiguration : SharplinerConfiguration
